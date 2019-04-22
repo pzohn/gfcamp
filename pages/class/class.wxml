@@ -1,0 +1,42 @@
+<!--顶部轮播图 begin-->
+  <swiper class="lunbo" id="lunbo" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+        <block wx:for="{{imgUrls}}">
+            <swiper-item>
+              <image src="{{item}}" class="slide-image"/>
+            </swiper-item>
+        </block>
+    </swiper>
+<!--顶部轮播图 end-->
+
+<scroll-view scroll-y="true">
+  <view class="detail">
+    <text class="title">LANCOME兰蔻小黑瓶精华肌底液</text>
+    <text class="price">￥500</text>
+  </view>
+  <view class="separate"></view>
+  <!-- sku选择 -->
+  <text bindtap="toggleDialog">请选择购买数量</text>
+  <view class="separate"></view>
+  <text>商品评价</text>
+  <text class="text-remark">东西还可以，好评~</text>
+  <view class="separate"></view>
+  <text>商品详情</text>
+  <block wx:for-items="{{detailImg}}" wx:key="name">
+    <image class="image_detail" src="{{item}}" />
+  </block>
+  <view class="temp"></view>
+</scroll-view>
+<!-- 底部悬浮栏 -->
+<view class="detail-nav">
+  <view class='detail-nav-view'>
+    <image bindtap="home" src="../../images/home.png"/>
+    <text>首页</text>
+  </view>
+  <view class="line_nav"></view>
+  <view class='detail-nav-view'>
+    <image bindtap="liuw" src="../../images/liwu.png" />
+    <text>送朋友</text>
+  </view>
+    <button class="button-green" value = "￥99&#13;&#10;单独购" bindtap="addCar" formType="submit"></button>
+    <button class="button-red" bindtap="immeBuy" formType="submit">￥29.9三人团</button>
+</view>

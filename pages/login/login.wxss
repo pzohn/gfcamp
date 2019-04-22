@@ -1,0 +1,98 @@
+.login{
+    width:100%;
+    height:100%;
+    overflow: hidden;
+    position:fixed;
+    background-image: url(https://www.hattonstar.com/login/login_bg.jpg);
+    background-repeat:no-repeat; 
+    background-size:100% 100%;
+    -moz-background-size:100% 100%;
+}
+
+.login_logo image{
+  width:274px;
+  height:137px;
+  padding-left: 15%;
+  padding-top: 15%
+}
+
+.forget{
+  padding-top:25px;
+  padding-left: 68%;
+}
+
+.forget text{
+  color: #FFFFFF;
+}
+
+.account{
+  display: flex;
+  flex-direction: row;
+  padding-left: 20px;
+  padding-top: 20%;
+  padding-bottom: 10px;
+  width: 80%;
+}
+
+.pass{
+  display: flex;
+  flex-direction: row;
+  padding-left: 20px;
+  padding-top: 10%;
+  padding-bottom: 10px;
+  width: 80%;
+}
+
+.title{
+  margin-right: 30px;
+  font-weight: bold;
+}
+
+.hr{
+  border: 1px solid #cccccc;
+  opacity: 0.2;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.btn{
+  width: 40%;
+  margin-top: 40px;
+  color: #FFFFFF;
+  border-radius: 12px;
+  background-color:#003333;
+  opacity:0.8;
+}
+
+.btn1{
+  width: 40%;
+  margin-top: 40px;
+  color: #FFFFFF;
+  border-radius: 12px;
+  background-color:#003333;
+  opacity:0.8;
+}
+
+.operate{
+  display: flex;
+  flex-direction: row;
+}
+
+.operate view{
+  margin: 0 auto;
+  margin-top: 40px;
+  font-size: 14px;
+  color: #333333;
+}
+
+
+.login view{
+  margin: 0 auto;
+}
+
+.button{
+  display: flex;
+  flex-direction: row;
+  width: 80%
+}
+

@@ -1,0 +1,80 @@
+<view class="content">
+  <view class="bg">
+    <view class="head">
+      <view class="headIcon">
+        <image src="{{avatarUrl}}" style="width:99px;height:99px;border-radius:50%"></image>
+      </view>
+      <view class="login">
+        <view class="authorize" bindtap="authorize">{{nickName}}</view>
+        <view class="account" bindtap="login">账号：{{phone}}</view>
+      </view>
+    </view>
+  </view>
+  <view class="hr"></view>
+  <view class="category">
+    <view class="category_item" wx:for="{{iconArray}}" wx:key="iconArray">
+      <view class="category_item_wrap" bindtap="onItemClick" id = "{{item.id}}">
+        <view class="icon_wrap">
+          <image src="{{item.iconUrl}}" class="index_icon"></image>
+        </view>
+        <view class="category_item_text">
+          <text>{{item.iconText}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="list">
+    <view class="item" bindtap="list" id = "1">
+      <view class="img">
+        <image src="https://www.yztcc.com/icon/order4.png" style="width:20px;height:24px;"></image>
+      </view>
+      <view class="name">全部订单</view>
+      <view class="detail">
+        <text>></text>
+      </view>
+    </view>
+    <view class="line"></view>
+    <view class="item" bindtap="list" id = "2">
+      <view class="img">
+        <image src="https://www.yztcc.com/icon/order2.png" style="width:20px;height:24px;"></image>
+      </view>
+      <view class="name">待收货订单</view>
+      <view class="detail">
+        <text>></text>
+      </view>
+    </view>
+    <view class="line"></view>
+    <view class="hr"></view>
+    <view class="item" bindtap="list" id = "3">
+      <view class="img">
+        <image src="https://www.yztcc.com/icon/order3.png" style="width:20px;height:24px;"></image>
+      </view>
+      <view class="name">未归还</view>
+      <view class="detail">
+        <text>></text>
+      </view>
+    </view>
+    <view class="line"></view>
+    <view class="item" bindtap="list" id = "4">
+      <view class="img">
+        <image src="https://www.yztcc.com/icon/order1.png" style="width:20px;height:24px;"></image>
+      </view>
+      <view class="name">已完成</view>
+      <view class="detail">
+        <text>></text>
+      </view>
+    </view>
+    <view class="line"></view>
+    <view class="hr"></view>
+  </view>
+  <view class="item" bindtap="loadCoupon">
+    <view class="img">
+      <image src="https://www.yztcc.com/icon/shoucang.png" style="width:20px;height:24px;"></image>
+    </view>
+    <view class="name">我的收藏</view>
+    <view class="detail">
+      <text>></text>
+    </view>
+  </view>
+  <view class="line"></view>
+</view>

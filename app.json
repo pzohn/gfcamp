@@ -1,0 +1,17 @@
+{
+  "pages": [
+    "pages/class/class",
+    "pages/classes/classes",
+    "pages/login/login",
+    "pages/liveplay/liveplay",
+    "pages/my/my",
+    "pages/myclasses/myclasses"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "未来营",
+    "navigationBarTextStyle": "black"
+  },
+  "sitemapLocation": "sitemap.json"
+}
