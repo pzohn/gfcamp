@@ -5,6 +5,45 @@ Page({
    * 页面的初始数据
    */
   data: {
+    array: [
+      {
+        img:'../../images/123.png',
+        title:'探秘恐龙世界',
+        percent:66
+      }
+    ],
+    types: [
+      {
+        name: "深入了解昆虫大百科,锻炼孩子的观察力!",
+        img: "https://www.hattonstar.com/movie/dongzuo.png",
+        videoid: 236462
+      },
+      {
+        name: "在家就能带孩子去宇宙遨游!",
+        img: "https://www.hattonstar.com/movie/xiju.png",
+        videoid: 239209
+      },
+      {
+        name: "海洋知识大百科探索坤丽的海洋奇观!",
+        img: "https://www.hattonstar.com/movie/aiqing.png",
+        videoid: 237119
+      },
+      {
+        name: "轻松掌握朗诵技巧,感受古诗韵律之美!",
+        img: "https://www.hattonstar.com/movie/kehuan.png",
+        videoid: 233124
+      },
+      {
+        name: "穿梭到白垩纪和做逻辑,漫游奇妙恐龙王国!",
+        img: "https://www.hattonstar.com/movie/donghua.png",
+        videoid: 236697
+      },
+      {
+        name: "一起去探索神秘王国,玩转迟到热带雨林!",
+        img: "https://www.hattonstar.com/movie/jingsong.png",
+        videoid: 236227
+      }
+    ]
 
   },
 

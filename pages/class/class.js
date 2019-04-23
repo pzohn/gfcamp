@@ -5,23 +5,29 @@ Page({
     imgUrls: [
       "http://image.360kad.com/group2/M00/AF/3A/CgAgFFy5ciCAZKE_AAFoOcMlBao349.jpg",
       "../../images/1.jpg",
-      "../../images/2.jpg",
-      "../../images/3.jpg"
+      "../../images/2.jpg"
     ],
+    title:"这里有孩子们最好奇、最想了解的自热及人文科学，让孩子在探索世界谜题中开拓视野，让想象力无限释放！",
     indicatorDots: true, //是否显示面板指示点
     autoplay: true, //是否自动切换
     interval: 3000, //自动切换时间间隔,3s
     duration: 1000, //  滑动动画时长1s
 
     // 商品详情介绍
-    detailImg: [
-      "https://www.hattonstar.com/card/1.jpg",
-      "https://www.hattonstar.com/card/2.jpg",
-      "https://www.hattonstar.com/card/3.jpg",
-      "https://www.hattonstar.com/card/4.jpg",
-      "https://www.hattonstar.com/card/5.jpg",
-      "https://www.hattonstar.com/card/6.jpg",
+    images: [
+      "../../images/logo1.png",
+      "../../images/logo2.png",
+      "../../images/logo3.png",
+      "../../images/logo4.png",
+      "../../images/logo5.png",
+      "../../images/logo1.png",
+      "../../images/logo2.png",
+      "../../images/logo3.png",
+      "../../images/logo4.png",
+      "../../images/logo5.png"
     ],
+    joinnum:16666,
+    currentTab:0
   },
   //预览图片
   previewImage: function (e) {
@@ -52,4 +58,15 @@ Page({
       duration: 2000
     });
   },
+
+  clickTab: function (e) {
+    var that = this;
+    if (this.data.currentTab === e.target.dataset.current) {
+      return false;
+    } else {
+      that.setData({
+        currentTab: e.target.dataset.current,
+      })
+    }
+  }
 })

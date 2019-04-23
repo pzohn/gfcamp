@@ -11,7 +11,7 @@ Page({
     iconArray: [
       {
         "iconUrl": 'https://www.yztcc.com/icon/info.png',
-        "iconText": '个人信息',
+        "iconText": '宝宝信息',
         "id":1
       },
       {

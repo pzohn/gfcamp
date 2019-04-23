@@ -1,0 +1,13 @@
+<template name="classes">  
+  <block wx:for = "{{array}}" wx:key="array">
+    <view class="item" bindtap="seeDetail" id="{{index}}">
+      <view> <image src="{{item.img}}" style="width:166px;height:166px;"></image> </view>
+      <view class="desc">
+        <view class="title">{{item.title}}</view>
+        <view class="percent">已体验{{item.percent}}%</view>
+        <progress percent='{{item.percent}}' active='true' stroke-width='10' backgroundColor='#EBEBEB' activeColor='red' style=''></progress>
+        <button class='studybutton'>继续体验</button>
+      </view>
+    </view>
+  </block>
+</template>

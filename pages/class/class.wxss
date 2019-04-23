@@ -50,6 +50,83 @@ image{width: 100%;vertical-align: top;display: block;}
 }
 /*轮播end*/
 
+.title{
+  background-color:rgb(29, 194, 57);
+  color: white;
+  margin-bottom: 5px;
+}
+
+/* 参与头像 */
+.join{
+  display: flex;
+  flex-flow: row; 
+}
+.join-box {
+  width: 65%;
+  height: auto;
+  position: relative;
+  display: flex;
+  flex-direction:columnl;
+  justify-content: flex-start;
+  padding:0 10rpx;
+  box-sizing: border-box;
+}
+.join-text{
+  padding-top: 12rpx;
+  font-size: 12px;
+}
+.join-box view .text {
+  display: inline-block;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+}
+
+view .text:first-of-type {
+  transform: translateX(0px);
+}
+
+
+/*tab-begin*/
+.about_page{
+  margin: 0 10px;
+}
+.swiper-tab{
+    width: 100%;
+    text-align: center;
+    height: 88rpx;
+    line-height: 88rpx;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-evenly;
+    color: #ccc;
+    font-size: 16px;
+}
+.swiper-tab-item{
+    width: 30%; 
+    color:#434343;
+}
+.active{
+    color:#F65959;
+    font-size: 16px;
+    font-weight: bold;
+}
+.juzhong{
+  margin: 0 auto;
+}
+.domain{
+  background-color: #fff;
+  height: 100%;
+  margin:0 10px;
+}
+.show{
+  display: block;
+}
+.hidden{
+  display: none;
+}
+/*tab-end*/
+
 
 .detail-nav {
   display: flex;
@@ -65,27 +142,33 @@ image{width: 100%;vertical-align: top;display: block;}
   height: 110rpx;
 }
 .button-green {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   color: white;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
   font-size: 30rpx;
   border-radius: 0rpx;
   width: 50%;
   height: 100%;
-  line-height: 100rpx;
+  line-height: 50rpx;
   background-color: #4caf50;
 }
 .button-red {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   color: white;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
   font-size: 30rpx;
   border-radius: 0rpx;
   width: 50%;
   height: 100%;
-  line-height: 100rpx;
+  line-height: 50rpx;
   background-color: #f44336;
 }
 
