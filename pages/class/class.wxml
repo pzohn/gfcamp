@@ -28,12 +28,17 @@
 
 <view class = "{{currentTab == 0 ? 'show':'hidden'}}" >
   <scroll-view>
-    <text>暂无内容1</text>
+    <image class="img" src="../../images/c1.jpg" mode="widthFix"></image>
   </scroll-view>
 </view>
 <view class = "{{currentTab == 1 ? 'show':'hidden'}}" >
   <scroll-view>
-    <text>暂无内容2</text>
+    <image class="img" src="../../images/c2.jpg" mode="widthFix"></image>
+  </scroll-view>
+</view>
+<view class = "{{currentTab == 2 ? 'show':'hidden'}}" >
+  <scroll-view>
+    <image class="img" src="../../images/c3.jpg" mode="widthFix"></image>
   </scroll-view>
 </view>
 

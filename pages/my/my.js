@@ -10,24 +10,19 @@ Page({
     avatarUrl:'',
     iconArray: [
       {
-        "iconUrl": 'https://www.yztcc.com/icon/info.png',
+        "iconUrl": 'https://www.hattonstar.com/gfcamp/info.png',
         "iconText": '宝宝信息',
         "id":1
       },
       {
-        "iconUrl": 'https://www.yztcc.com/icon/address.png',
-        "iconText": '地址管理',
+        "iconUrl": 'https://www.hattonstar.com/gfcamp/card.png',
+        "iconText": '优惠卷',
         "id": 2
       },
       {
-        "iconUrl": 'https://www.yztcc.com/icon/healthy.png',
-        "iconText": '健康档案',
+        "iconUrl": 'https://www.hattonstar.com/gfcamp/suggest.png',
+        "iconText": '意见反馈',
         "id": 3
-      },
-      {
-        "iconUrl": 'https://www.yztcc.com/icon/community.png',
-        "iconText": '我的社区',
-        "id": 4
       }
     ]
   },

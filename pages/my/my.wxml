@@ -6,7 +6,7 @@
       </view>
       <view class="login">
         <view class="authorize" bindtap="authorize">{{nickName}}</view>
-        <view class="account" bindtap="login">账号：{{phone}}</view>
+        <view class="account" bindtap="login">性别：{{sex}}</view>
       </view>
     </view>
   </view>
@@ -25,9 +25,6 @@
   </view>
   <view class="list">
     <view class="item" bindtap="list" id = "1">
-      <view class="img">
-        <image src="https://www.yztcc.com/icon/order4.png" style="width:20px;height:24px;"></image>
-      </view>
       <view class="name">全部订单</view>
       <view class="detail">
         <text>></text>
@@ -35,10 +32,7 @@
     </view>
     <view class="line"></view>
     <view class="item" bindtap="list" id = "2">
-      <view class="img">
-        <image src="https://www.yztcc.com/icon/order2.png" style="width:20px;height:24px;"></image>
-      </view>
-      <view class="name">待收货订单</view>
+      <view class="name">待付款</view>
       <view class="detail">
         <text>></text>
       </view>
@@ -46,19 +40,13 @@
     <view class="line"></view>
     <view class="hr"></view>
     <view class="item" bindtap="list" id = "3">
-      <view class="img">
-        <image src="https://www.yztcc.com/icon/order3.png" style="width:20px;height:24px;"></image>
-      </view>
-      <view class="name">未归还</view>
+      <view class="name">拼团中</view>
       <view class="detail">
         <text>></text>
       </view>
     </view>
     <view class="line"></view>
     <view class="item" bindtap="list" id = "4">
-      <view class="img">
-        <image src="https://www.yztcc.com/icon/order1.png" style="width:20px;height:24px;"></image>
-      </view>
       <view class="name">已完成</view>
       <view class="detail">
         <text>></text>
@@ -67,14 +55,11 @@
     <view class="line"></view>
     <view class="hr"></view>
   </view>
-  <view class="item" bindtap="loadCoupon">
-    <view class="img">
-      <image src="https://www.yztcc.com/icon/shoucang.png" style="width:20px;height:24px;"></image>
-    </view>
+  <!-- <view class="item" bindtap="loadCoupon">
     <view class="name">我的收藏</view>
     <view class="detail">
       <text>></text>
     </view>
-  </view>
+  </view> -->
   <view class="line"></view>
 </view>

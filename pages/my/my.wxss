@@ -4,8 +4,9 @@
 }
 .bg{
   width:100%;
-  height: 200px;
-  background-image: url('https://www.yztcc.com/icon/me.jpg');
+  background:no-repeat center center;
+  background-size: cover;
+  background-image: url('https://www.hattonstar.com/gfcamp/myback.jpg');
 }
 .head{
   display: flex;
@@ -15,7 +16,7 @@
   margin: 10px;
 }
 .login{
-  color: #ffffff;
+  color: #070000;
   font-size: 15px;
   font-weight: bold;
   position: absolute;
@@ -50,8 +51,8 @@
 }
 
 .account{
-  color: #f2f2f2;
-  font-size: 13px;
+  color: #737373;
+  font-size: 12px;
   margin-top:10px;
 }
 .item{
@@ -63,10 +64,7 @@
   width: 100%;
   height: 15px;
 }
-.img{
-  margin-left: 10px;
-  line-height: 50px;
-}
+
 .name{
   padding-top:15px;
   padding-left: 10px;
