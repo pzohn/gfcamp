@@ -1,0 +1,44 @@
+ <!-- <view class="search">
+  <view class="searchBg">
+    <view>
+      <image src="https://www.yztcc.com/icon/search.jpg" style="width:20px;height:21px;"></image>
+    </view>
+    <view>
+      <input type="text" placeholder="请输入营地关键字" placeholder-class="holder" bindinput="accountInput" />
+    </view>
+  </view>
+  <view class="btn1" bindtap="resetSearch">搜索</view>
+</view> -->
+
+
+<view class="navbar">
+
+ <view class="search">
+  <view class="searchBg">
+    <view>
+      <image src="https://www.yztcc.com/icon/search.jpg" style="width:20px;height:21px;"></image>
+    </view>
+    <view>
+      <input type="text" placeholder="请输入营地关键字" placeholder-class="holder" bindinput="accountInput" />
+    </view>
+  </view>
+  <view class="btn1" bindtap="resetSearch">搜索</view>
+</view>
+
+  <view style='display: flex;'>
+    <text  wx:for="{{navbar}}"
+          data-idx="{{index}}"
+          class="item {{currentTab==index ? 'active' : ''}}"
+          wx:key="unique" bindtap="navbarTap">{{item}}</text>
+  </view>
+</view>
+
+<view class='video_container'>
+  <view class='type-item' wx:for="{{types}}" wx:key="{{index}}" data-videoid="{{item.videoid}}" bindtap='typeHandler'>
+    <image class='type-img' src='{{item.img}}' mode='aspectFill'></image>
+    <view class='title'>
+        <text>{{item.name}}</text>
+        <button class='btn' data-videoid="{{item.videoid}}" bindtap='typeHandler'>去体验</button>
+    </view>
+  </view>
+</view>

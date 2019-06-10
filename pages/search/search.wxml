@@ -1,0 +1,18 @@
+
+<view class="search">
+  <view class="searchBg">
+    <view>
+      <image src="https://www.yztcc.com/icon/search-1.jpg" style="width:20px;height:21px;"></image>
+    </view>
+    <view>
+      <input type="text" placeholder="请输入所要租赁的商品名称" placeholder-class="holder" bindinput="accountInput" value="{{name}}"/>
+    </view>
+  </view>
+  <view class="btn" bindtap="resetSearch">搜索</view>
+</view>
+<loading hidden="{{hiddenLoading}}">正在加载</loading> 
+<view class="hr"></view>
+  <import src="../template/template" />
+  <view class="list">
+    <template is="goods" data="{{array}}" />
+  </view>

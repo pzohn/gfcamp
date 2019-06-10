@@ -1,19 +1,15 @@
 {
   "pages": [
-    "pages/playclass/playclass",
-    "pages/class/class",
+    
+    "pages/detail/detail",
+    
+    "pages/index/index",
     "pages/classes/classes",
+    "pages/playclass/playclass",
     "pages/myclasses/myclasses",
     "pages/my/my",
-    
-    
-    
+    "pages/search/search",
     "pages/authorize/authorize",
-    
-    
-    
-    
-    
     "pages/liveplay/liveplay"
   ],
   "window": {

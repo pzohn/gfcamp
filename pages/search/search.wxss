@@ -1,0 +1,86 @@
+.search{
+  display: flex;
+  flex-direction: row;
+  padding: 5px;
+  width: 100%;
+}
+.searchBg{
+  background-color: #E8E8ED;
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  height: 50px;
+  line-height: 50px;
+  border-radius:16px;
+}
+.searchBg image{
+  margin-left: 10px;
+  margin-top:5px;
+}
+.search input{
+  height: 50px;
+  line-height: 50px;
+  font-size: 20px;
+}
+.holder{
+  font-size: 16px;
+}
+.btn{
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 50px;
+  margin-left: 10px;
+  border:1px solid #27c078;
+  width:15%;
+  text-align: center;
+  background-color: #E8E8ED;
+  border-radius: 3px;
+}
+.hr{
+  border:2px solid #cccccc;
+  opacity: 0.2;
+}
+.item{
+  display: flex;
+  flex-direction: row;
+  margin-left: 10px;
+  margin-bottom: 5px;
+}
+
+.desc{
+  margin-left: 50px;
+  line-height: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.title{
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.count{
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+}
+
+.company{
+  color:coral;
+}
+
+.city{
+  color:blue;
+}
+
+.price{
+  color:red;
+  font-size: 16px;
+}
+
+.hr2{
+  height: 2px;
+  background-color: #cccccc;
+  opacity: 0.2;
+}
+
