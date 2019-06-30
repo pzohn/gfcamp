@@ -1,9 +1,7 @@
 {
   "pages": [
-    
-    "pages/detail/detail",
-    
     "pages/index/index",
+    "pages/detail/detail",
     "pages/classes/classes",
     "pages/playclass/playclass",
     "pages/myclasses/myclasses",

@@ -1,55 +1,16 @@
-// var QQMapWX = require('../../libs/qqmap-wx-jssdk.js');
-// var demo = new QQMapWX({
-//   key: 'JSWBZ-2UC6K-ZCTJK-AMKZN-J7WEZ-6RBPZ'
-// });
 Page({
 
   data: {
-    imgUrls: [
-      'http://www.gfcamps.cn/images/wx/header1.jpg',
-      'http://www.gfcamps.cn/images/wx/header2.jpg',
-      'http://www.gfcamps.cn/images/wx/header3.jpg'
-    ],
-    recommend: [],
-    hotrec: [],
-
-    circular: true,
-    indicatorDots: true,
-    autoplay: true,
-    interval: 5000,
-    duration: 1000,
-    displayMultipleItems: 3,
-    // address:'',
-    name:'',
-    navbar: ['自然营', '生存营', '思辨营', '科学营', '人文营'],
+    navbar: ['自然营', '生存营', '科学营', '人文营'],
     currentTab: 0,
-    types: [
-      {
-        name: "倾听森林上旋律,爱护天空下的音符倾听森林上旋律,爱护天空下的音符",
-        img: "../../images/ceshi1.jpg",
-        id: 236462
-      },
-      {
-        name: "在家就能带孩子去宇宙遨游!",
-        img: "../../images/ceshi2.jpg",
-        videoid: 239209
-      },
-      {
-        name: "海洋知识大百科探索坤丽的海洋奇观!",
-        img: "../../images/ceshi3.jpg",
-        videoid: 237119
-      },
-      {
-        name: "轻松掌握朗诵技巧,感受古诗韵律之美!",
-        img: "../../images/ceshi4.jpg",
-        videoid: 233124
-      },
-      {
-        name: "穿梭到白垩纪和做逻辑,漫游奇妙恐龙王国!",
-        img: "../../images/ceshi5.jpg",
-        videoid: 236697
-      }
-    ]
+    activity_1: [],
+    activity_2: [],
+    activity_3: [],
+    activity_4: [],
+    flag_1: true,
+    flag_2: true,
+    flag_3: true,
+    flag_4: true
   },
 
   /**
@@ -57,12 +18,65 @@ Page({
    */
   onLoad: function (options) {
     var page = this;
-
-    page.initData();
+    page.initData(1);
+    page.initData(2);
+    page.initData(3);
+    page.initData(4);
+    page.setData({
+      flag_1: false
+    });
   },
 
-  initData: function () {
-
+  initData: function (id) {
+    var page = this;
+    wx.request({
+      url: 'https://www.gfcamps.cn/getCampactivitiesByBigType',
+      data: {
+        type_id: id
+      },
+      method: 'POST',
+      success: function (res) {
+        var activity = [];
+        for (var index in res.data) {
+          var object = new Object();
+          object.img = 'https://www.gfcamps.cn/images/' + res.data[index].title_pic;
+          object.name = res.data[index].name;
+          object.id = res.data[index].id;
+          activity[index] = object;
+        }
+        if (id == 1){
+          page.setData({
+            activity_1: activity
+          });
+        }
+        else if (id == 2) {
+          page.setData({
+            activity_2: activity
+          });
+        }
+        else if (id == 3) {
+          page.setData({
+            activity_3: activity
+          });
+        }
+        else if (id == 4) {
+          page.setData({
+            activity_4: activity
+          });
+        }
+      },
+      fail: function (res) {
+        wx.showModal({
+          title: '错误提示',
+          content: '服务器无响应，请联系工作人员!',
+          success: function (res) {
+            if (res.confirm) {
+            } else if (res.cancel) {
+            }
+          }
+        })
+      }
+    })
   },
 
   /**
@@ -76,10 +90,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    // var app = getApp();
-    // this.setData({
-    //   address: app.globalData.city
-    // });
   },
 
   /**
@@ -108,6 +118,13 @@ Page({
    */
   onReachBottom: function () {
 
+  },
+
+  typeHandler: function (e) {
+    var id = e.currentTarget.dataset.videoid;
+    wx.navigateTo({
+      url: '../detail/detail?id=' + id
+    });
   },
 
   /**
@@ -150,24 +167,28 @@ Page({
     });
   },
 
-  recommendGood: function (e) {
-    var id = e.currentTarget.id;
-    wx.navigateTo({
-      url: '../details/details?id=' + id
-    });
-  },
-
-  hotrecGood: function (e) {
-    var id = e.currentTarget.id;
-    wx.navigateTo({
-      url: '../details/details?id=' + id
-    });
-  },
-
-  switchcity: function (e) {
-    var id = e.currentTarget.id;
-    wx.navigateTo({
-      url: '../switchcity/switchcity'
-    });
+  navbarTap:function (e) {
+    var page = this;
+    var id = e.target.dataset.idx + 1;
+    if (id == 1){
+      page.setData({
+        flag_1: false, flag_2: true, flag_3: true, flag_4: true, currentTab:id-1
+      });
+    }
+    else if (id == 2) {
+      page.setData({
+        flag_1: true, flag_2: false, flag_3: true, flag_4: true, currentTab: id - 1
+      });
+    }
+    else if (id == 3) {
+      page.setData({
+        flag_1: true, flag_2: true, flag_3: false, flag_4: true, currentTab: id - 1
+      });
+    }
+    else if (id == 4) {
+      page.setData({
+        flag_1: true, flag_2: true, flag_3: true, flag_4: false, currentTab: id - 1
+      });
+    }
   }
 })

@@ -88,13 +88,14 @@
   padding-bottom: 1px;
 }
 .searchBg{
-  background-color:burlywood;
+  background-color:#f2f2f2;
   width: 100%;
   display: flex;
   flex-direction: row;
   height: 40px;
   line-height: 40px;
   border-radius: 5px;
+  color: #999999;
 }
 .searchBg image{
   margin-left: 5px;
@@ -105,16 +106,18 @@
   height: 40px;
   line-height: 40px;
   font-size: 15px;
+  font-weight:200;
 }
 
 .btn1{
-  font-size: 13px;
-  font-weight: bold;
+  font-size: 18px;
+  font-weight:300;
   line-height: 40px;
   margin-left: 5%;
-  border:1px solid #18db59;
+  border:1px solid #3385ff;
   width:30%;
   text-align: center;
-  background-color: rgb(127, 216, 25);
+  background-color: #3385ff;
   border-radius: 5px;
+  color: #fff
 }
