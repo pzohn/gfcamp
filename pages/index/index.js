@@ -30,7 +30,7 @@ Page({
   initData: function (id) {
     var page = this;
     wx.request({
-      url: 'https://www.gfcamps.cn/getCampactivitiesByBigType',
+      url: 'https://www.gfcamps.cn/getCampactivitiesForWx',
       data: {
         type_id: id
       },
@@ -42,6 +42,7 @@ Page({
           object.img = 'https://www.gfcamps.cn/images/' + res.data[index].title_pic;
           object.name = res.data[index].name;
           object.id = res.data[index].id;
+          object.activity_id = res.data[index].activity_id;
           activity[index] = object;
         }
         if (id == 1){
@@ -121,9 +122,10 @@ Page({
   },
 
   typeHandler: function (e) {
-    var id = e.currentTarget.dataset.videoid;
+    var id = e.currentTarget.dataset.id;
+    var activity_id = e.currentTarget.dataset.activityid;
     wx.navigateTo({
-      url: '../detail/detail?id=' + id
+      url: '../detail/detail?id=' + id + '&activity_id=' + activity_id
     });
   },
 

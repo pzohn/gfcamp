@@ -11,14 +11,14 @@
   <text>{{title}}</text>
 </view>
 <!-- 参与购买头像 -->
-<view class='join'>
+<!-- <view class='join'>
   <view class='join-box'>
     <view wx:for="{{images}}" wx:key  style='transform:translateX({{-index*30}}rpx)'>
       <image class='text' src='{{item}}' mode='aspectFill'></image>
     </view>
   </view>
   <view class='join-text'>等{{joinnum}}人参与</view>
-</view>
+</view> -->
 <!--顶部轮播图 end-->
 <view class="swiper-tab">
     <view class="swiper-tab-item {{currentTab==0?'active':''}}" data-current="0" bindtap="clickTab">课程详情</view>
@@ -26,44 +26,25 @@
     <view class="swiper-tab-item {{currentTab==2?'active':''}}" data-current="2" bindtap="clickTab">购买须知</view>
 </view>
 
-<view class = "{{currentTab == 0 ? 'show':'hidden'}}" >
-  <scroll-view style="background-image:url('https://www.gfcamps.cn/images/wx/beijing1.jpg');background-repeat:no-repeat; background-size:100% 100%;padding-bottom:20%;">
-    <view style='padding-top:30%;padding-left:10%'>初心•出发</view>
-    <view style='margin-left:10%;margin-right:10%;'>
-        <text>我们想要带给孩子什么样的自然教育？
-    这个问题指导着我们在所做的事情上不断耕耘，在儿童独立营上尤其如此。当然最好的自然教育不是说出来，而是做出来。
-我们认为：
-找到自己对自然的兴趣比认识几种动植物更重要；
-尊重孩子内在的驱动力比五花八门的课程形式更重要；
-拥有感知幸福的能力比多样的特长和优秀的成绩更重要。
-基于我们对教育的理解，结合我们想做出的自然教育，我们希望和孩子一起回到乡村，在最踏实的土地上，在最质朴的氛围中，和孩子一起感受自然的富饶与多样，认识我们所生长的土地，了解人与自然的关系，从中汲取生命的能量，滋养身心；从中习得智慧，学会更好的生活。
-这不仅是一场有趣有料的独立营，还是一场促进孩子成长的成长营。孩子收获的不仅仅是深刻的记忆，还有源自内心的成长。</text>
-    </view>
-    <view style='padding-left:10%'>思考•未来</view>
-    <view style='margin-left:10%;margin-right:10%;'>
-          <text>1、回归生活的自然教育
-5天4夜的独立生活，孩子们不仅学会的是要自己洗衣服、自己洗澡、照顾自己的生活，更重要的是学会为自己的语言、行为、情绪等负责。生活无小事，我们和孩子一起在日常生活的点点滴滴中，不断加深这种意识，从而促进孩子的成长。
-2、全新自然观察体验
-习以为常的五感（观、嗅、尝、听、触），在我们与自然的联结中有着大用处，原来仅仅是通过自己的五感，就与大自然发生那么多好玩有趣的故事。体验式的教学方式，和孩子一起开发身体五感的用途，习得运用五感与自然联结的方式，创造属于自己的自然小故事。
-3、miniPBL与自然教育的完美结合
-运用PBL，以问题为导向，以孩子为本，激发孩子的好奇心，驱动孩子内在学习动力，尊重每一位孩子的真实体验和需求，给予孩子无条件的爱与支持，帮助孩子在团队中找到自己的生态位。在学习实践的过程中，促进孩子核心素养的发展，陪伴孩子成长。
-4、收获同龄人之外的友谊
-营期以8-12岁儿童为主，全程需要孩子照顾自己，更需要与不同年龄、性格、行为模式的伙伴相处，开启全新社交体验，积累自己社交经验，全面提升孩子的自理自控能力与社交能力等等。给孩子一片滋润丰沃的土壤，收获远超出我们期望的惊喜！</text>
-    </view>
-    <view style='margin-left:10%;margin-right:10%;'> 
-        <image class="img" src="https://www.gfcamps.cn/images/activity/201905191.jpg" mode="widthFix"></image>
-    <image class="img" src="https://www.gfcamps.cn/images/activity/201905192.jpg" mode="widthFix"></image>
-    </view>
+<view class = "{{currentTab == 0 ? 'show':'hidden'}}" style='margin-bottom:50px;'>
+  <scroll-view>
+    <block wx:for="{{classInfo}}">
+      <image class="img" src="{{item}}" mode="widthFix"></image>
+    </block>
   </scroll-view>
 </view>
-<view class = "{{currentTab == 1 ? 'show':'hidden'}}" >
+<view class = "{{currentTab == 1 ? 'show':'hidden'}}" style='margin-bottom:50px;'>
   <scroll-view>
-    <!-- <image class="img" src="../../images/c2.jpg" mode="widthFix"></image> -->
+    <block wx:for="{{listInfo}}">
+      <image class="img" src="{{item}}" mode="widthFix"></image>
+    </block>
   </scroll-view>
 </view>
-<view class = "{{currentTab == 2 ? 'show':'hidden'}}" >
+<view class = "{{currentTab == 2 ? 'show':'hidden'}}" style='margin-bottom:50px;'>
   <scroll-view>
-    <!-- <image class="img" src="../../images/c3.jpg" mode="widthFix"></image> -->
+    <block wx:for="{{knowInfo}}">
+      <image class="img" src="{{item}}" mode="widthFix"></image>
+    </block>
   </scroll-view>
 </view>
 
@@ -75,15 +56,15 @@
   </view>
   <view class="line_nav"></view>
   <view class='detail-nav-view'>
-    <image bindtap="liuw" src="../../images/liwu.png" />
-    <text>送朋友</text>
+    <image bindtap="liuw" src="../../images/collect.png" />
+    <text>收藏</text>
   </view>
-  <button  class='button-green' bindtap="immeBuy" formType="submit">
-    <text>￥99</text>
-    <text>单独购</text>
+  <button  class='button-green' formType="submit">
+    <text>￥{{price}}</text>
+    <!-- <text>单独购</text> -->
   </button>
   <button  class='button-red' bindtap="immeBuy" formType="submit">
-    <text>￥29.9</text>
-    <text>三人团</text>
+    <!-- <text>￥29.9</text> -->
+    <text>购买</text>
   </button>
 </view>
