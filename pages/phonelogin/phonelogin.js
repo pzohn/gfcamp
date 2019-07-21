@@ -128,6 +128,9 @@ Page({
         icon: 'none',
         duration: 1000
       })
+      wx.navigateBack({
+        delta: 1
+      });
     }
   },
   /**
