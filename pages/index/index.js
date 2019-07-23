@@ -1,5 +1,4 @@
 Page({
-
   data: {
     navbar: ['自然营', '生存营', '科学营', '人文营'],
     currentTab: 0,
@@ -17,6 +16,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var app = getApp();
+    var loginCode = wx.getStorageSync('phone');
+    if (loginCode == "") {
+      app.globalData.loginFlag = false;
+    } else {
+      app.globalData.loginFlag = true;
+      app.globalData.phone = loginCode;
+    }
     var page = this;
     page.initData(1);
     page.initData(2);

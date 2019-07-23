@@ -1,7 +1,11 @@
+var app = getApp()
 Page({
   data: {
     isLike: true,
     price:0,
+    detail_id:0,
+    iscollect: false,
+    collect_url:'../../images/collect-0.png',
     // banner
 
     indicatorDots: true, //是否显示面板指示点
@@ -32,10 +36,18 @@ Page({
   },
 
   onLoad: function (options) {
-    console.log(options);
+    var loginCode = wx.getStorageSync('phone');
+    if (loginCode == "") {
+      app.globalData.loginFlag = false;
+    } else {
+      app.globalData.loginFlag = true;
+      app.globalData.phone = loginCode;
+    }
     var id = options.id;
     var activity_id = options.activity_id;
+    this.setData({ detail_id:id});
     this.initData(id,activity_id);
+    this.initCollect();
   },
 
   initData: function (id, activity_id) {
@@ -104,24 +116,110 @@ Page({
     })
   },
   // 收藏
-  addLike() {
-    this.setData({
-      isLike: !this.data.isLike
-    });
+  collect: function () {
+    var page = this;
+    if (page.isLogin()){
+      wx.request({
+        url: 'https://www.gfcamps.cn/collect',
+        data: {
+          phone: app.globalData.phone,
+          detail_id: page.data.detail_id,
+          collect_flag: !page.data.iscollect
+        },
+        method: 'POST',
+        success: function (res) {
+          console.log(res.data)
+          page.setData({
+            iscollect: res.data,
+          });
+          page.initCollectUrl();
+        },
+        fail: function (res) {
+          wx.showModal({
+            title: '错误提示',
+            content: '服务器无响应，请联系工作人员!',
+            success: function (res) {
+              if (res.confirm) {
+              } else if (res.cancel) {
+              }
+            }
+          })
+        }
+      })
+    }
   },
-  // 跳到购物车
-  toCar() {
-    wx.switchTab({
-      url: '/pages/cart/cart'
+
+  initCollect: function () {
+    var page = this;
+    wx.request({
+      url: 'https://www.gfcamps.cn/iscollect',
+      data: {
+        phone: app.globalData.phone,
+        detail_id: page.data.detail_id
+      },
+      method: 'POST',
+      success: function (res) {
+        page.setData({
+          iscollect: res.data
+        });
+        page.initCollectUrl();
+      },
+      fail: function (res) {
+        wx.showModal({
+          title: '错误提示',
+          content: '服务器无响应，请联系工作人员!',
+          success: function (res) {
+            if (res.confirm) {
+            } else if (res.cancel) {
+            }
+          }
+        })
+      }
     })
   },
+
   // 立即购买
   immeBuy() {
-    wx.showToast({
-      title: '购买成功',
-      icon: 'success',
-      duration: 2000
-    });
+    if (this.isLogin()){
+      wx.showToast({
+        title: '购买成功',
+        icon: 'success',
+        duration: 2000
+      });
+    }
+  },
+
+  initCollectUrl() {
+    if (this.data.iscollect == true){
+      this.setData({ collect_url: '../../images/collect.png'})
+    }else{
+      this.setData({ collect_url: '../../images/collect-0.png' })
+    }
+  },
+
+  isLogin() {
+    if (app.globalData.loginFlag == false) {
+      wx.showModal({
+        title: '错误提示',
+        content: '用户登录,请登录!',
+        confirmText: '登录',
+        success: function (res) {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '../phonelogin/phonelogin',
+            })
+          }
+        }
+      })
+      return false;
+    }
+    return true;
+  },
+
+  home() {
+    wx.switchTab({
+      url: '../index/index',
+    })
   },
 
   clickTab: function (e) {

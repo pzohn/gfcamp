@@ -2,11 +2,11 @@
   <view class="bg">
     <view class="head">
       <view class="headIcon">
-        <image src="{{avatarUrl}}" style="width:99px;height:99px;border-radius:50%"></image>
+        <image src="{{avatarUrl}}" style="width:66px;height:66px;border-radius:66%"></image>
       </view>
       <view class="login">
         <view class="authorize" bindtap="authorize">{{nickName}}</view>
-        <view class="account" bindtap="login">性别：{{sex}}</view>
+        <!-- <view class="account" bindtap="login">性别：{{sex}}</view> -->
       </view>
     </view>
   </view>
@@ -32,22 +32,29 @@
     </view>
     <view class="line"></view>
     <view class="item" bindtap="list" id = "2">
-      <view class="name">待付款</view>
+      <view class="name">已支付</view>
+      <view class="detail">
+        <text>></text>
+      </view>
+    </view>
+    <view class="line"></view>
+    <view class="item" bindtap="list" id = "3">
+      <view class="name">未支付</view>
+      <view class="detail">
+        <text>></text>
+      </view>
+    </view>
+    <view class="line"></view>
+    <view class="item" bindtap="list" id = "3">
+      <view class="name">未完成</view>
       <view class="detail">
         <text>></text>
       </view>
     </view>
     <view class="line"></view>
     <view class="hr"></view>
-    <view class="item" bindtap="list" id = "3">
-      <view class="name">拼团中</view>
-      <view class="detail">
-        <text>></text>
-      </view>
-    </view>
-    <view class="line"></view>
-    <view class="item" bindtap="list" id = "4">
-      <view class="name">已完成</view>
+    <view class="item" bindtap="collect">
+      <view class="name">我的收藏</view>
       <view class="detail">
         <text>></text>
       </view>

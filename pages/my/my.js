@@ -1,4 +1,4 @@
-// pages/order/order.js
+var app = getApp()
 Page({
 
   /**
@@ -31,21 +31,75 @@ Page({
    * 生命周期函数--监听页面加载
    */
   list: function(e) {
-    var app = getApp();
-    if (app.globalData.loginFlag == false) {
+    if (this.isLogin()) {
+      var id = e.currentTarget.id;
       wx.navigateTo({
-        url: '../login/login'
+        url: '../list/list?type=' + id + '&ids=11@3'
       });
-      return;
     }
-    var id = e.currentTarget.id;
-    wx.navigateTo({
-      url: '../orderlist/orderlist?type=' + id
-    });
+  },
+
+  collect () {
+    if (this.isLogin()) {
+      wx.request({
+        url: 'https://www.gfcamps.cn/getCollect',
+        data: {
+          phone: app.globalData.phone
+        },
+        method: 'POST',
+        success: function (res) {
+          if (res.data != 0) {
+            wx.navigateTo({
+              url: '../collect/collect?ids=' + res.data
+            });
+          } else {
+            wx.showModal({
+              title: '收藏夹为空',
+              content: '收藏夹为空!',
+              showCancel: false,
+              success: function (res) {
+                if (res.confirm) {
+                }
+              }
+            });
+            return;
+          }
+        },
+        fail: function (res) {
+          wx.showModal({
+            title: '错误提示',
+            content: '服务器无响应，请联系工作人员!',
+            showCancel: false,
+            success: function (res) {
+              if (res.confirm) {
+              }
+            }
+          })
+        }
+      })
+    }
+  },
+
+  isLogin() {
+    if (app.globalData.loginFlag == false) {
+      wx.showModal({
+        title: '错误提示',
+        content: '用户登录,请登录!',
+        confirmText: '登录',
+        success: function (res) {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '../phonelogin/phonelogin',
+            })
+          }
+        }
+      })
+      return false;
+    }
+    return true;
   },
 
   authorize: function () {
-    var app = getApp();
     if (app.globalData.authorizeFlag == false){
       wx.navigateTo({
         url: '../getuser/getuser'
@@ -54,7 +108,6 @@ Page({
   },
 
   login: function () {
-    var app = getApp();
     if (app.globalData.loginFlag == false) {
       wx.navigateTo({
         url: '../login/login'
@@ -63,7 +116,6 @@ Page({
   },
 
   onItemClick: function (e) {
-    var app = getApp();
     if (app.globalData.loginFlag == false) {
       wx.navigateTo({
         url: '../login/login'
@@ -83,7 +135,6 @@ Page({
   },
 
   onLoad: function (options) {
-    var app = getApp();
     var wxUserInfo = wx.getStorageSync('wxUserInfo');
     if (wxUserInfo == ""){
       app.globalData.authorizeFlag = false;
@@ -97,7 +148,6 @@ Page({
   },
 
   loadCoupon: function () {
-    var app = getApp();
     if (app.globalData.loginFlag == false) {
       wx.navigateTo({
         url: '../login/login'
@@ -105,46 +155,6 @@ Page({
       return;
     }
     this.collect();
-  },
-
-  collect: function () {
-    var app = getApp();
-    wx.request({
-      url: 'https://www.yztcc.com/getCollect',
-      data: {
-        login_id: app.globalData.login_id
-      },
-      method: 'POST',
-      success: function (res) {
-        if (res.data != 0) {
-          wx.navigateTo({
-            url: '../collect/collect'
-          });
-        }else{
-          wx.showModal({
-            title: '收藏夹为空',
-            content: '收藏夹为空!',
-            showCancel:false,
-            success: function (res) {
-              if (res.confirm) {
-              } 
-            }
-          });
-          return;
-        }
-      },
-      fail: function (res) {
-        wx.showModal({
-          title: '错误提示',
-          content: '服务器无响应，请联系工作人员!',
-          showCancel: false,
-          success: function (res) {
-            if (res.confirm) {
-            }
-          }
-        })
-      }
-    })
   },
 
   /**
@@ -158,7 +168,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    var app = getApp();
     if (app.globalData.loginFlag == true){
       this.setData({ phone: app.globalData.phone });
     }

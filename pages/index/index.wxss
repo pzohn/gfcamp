@@ -52,9 +52,6 @@
 .title{
   display: flex;
   flex-direction: row;
-}
-
-.title{
   padding-top: 10px;
 }
 

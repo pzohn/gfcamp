@@ -1,5 +1,4 @@
-
-var app = require('../../utils/util.js');
+var app = getApp();
 Page({
   /**
    * 页面的初始数据
@@ -122,15 +121,35 @@ Page({
       })
       return false;
     } else {
-      wx.setStorageSync('phone', this.data.phone);
-      wx.showToast({
-        title: '欢迎来到未来营',
-        icon: 'none',
-        duration: 1000
+      var page = this;
+      wx.request({
+        url: 'https://www.gfcamps.cn/savePhone',
+        data: {
+          phone: page.data.phone
+        },
+        method: 'POST',
+        success: function (res) {
+          if (res.data != 0){
+            console.log(res.data);
+            wx.setStorageSync('phone', page.data.phone);
+            app.globalData.loginFlag = true;
+            wx.navigateBack({
+              delta: 1
+            });
+          }
+        },
+        fail: function (res) {
+          wx.showModal({
+            title: '错误提示',
+            content: '服务器无响应，请联系工作人员!',
+            success: function (res) {
+              if (res.confirm) {
+              } else if (res.cancel) {
+              }
+            }
+          })
+        }
       })
-      wx.navigateBack({
-        delta: 1
-      });
     }
   },
   /**

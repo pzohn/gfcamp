@@ -37,6 +37,7 @@ App({
   globalData: {
     phone: '',
     login_id: 0,
-    loginFlag: false
+    loginFlag: false,
+    authorizeFlag:false
   }
 })

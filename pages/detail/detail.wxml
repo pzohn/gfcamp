@@ -1,6 +1,6 @@
 <!--顶部轮播图 begin-->
 <swiper class="lunbo" id="lunbo" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
-  <block wx:for="{{imgUrls}}">
+  <block wx:for="{{imgUrls}}" wx:key="{{imgUrls}}">
       <swiper-item>
         <image src="{{item}}" class="slide-image"/>
       </swiper-item>
@@ -28,21 +28,21 @@
 
 <view class = "{{currentTab == 0 ? 'show':'hidden'}}" style='margin-bottom:50px;'>
   <scroll-view>
-    <block wx:for="{{classInfo}}">
+    <block wx:for="{{classInfo}}" wx:key="classInfo" >
       <image class="img" src="{{item}}" mode="widthFix"></image>
     </block>
   </scroll-view>
 </view>
 <view class = "{{currentTab == 1 ? 'show':'hidden'}}" style='margin-bottom:50px;'>
   <scroll-view>
-    <block wx:for="{{listInfo}}">
+    <block wx:for="{{listInfo}}" wx:key="listInfo">
       <image class="img" src="{{item}}" mode="widthFix"></image>
     </block>
   </scroll-view>
 </view>
 <view class = "{{currentTab == 2 ? 'show':'hidden'}}" style='margin-bottom:50px;'>
   <scroll-view>
-    <block wx:for="{{knowInfo}}">
+    <block wx:for="{{knowInfo}}" wx:key="knowInfo">
       <image class="img" src="{{item}}" mode="widthFix"></image>
     </block>
   </scroll-view>
@@ -56,7 +56,7 @@
   </view>
   <view class="line_nav"></view>
   <view class='detail-nav-view'>
-    <image bindtap="liuw" src="../../images/collect.png" />
+    <image bindtap="collect" src="{{collect_url}}" />
     <text>收藏</text>
   </view>
   <button  class='button-green' formType="submit">

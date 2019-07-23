@@ -9,7 +9,10 @@
     "pages/my/my",
     "pages/search/search",
     "pages/authorize/authorize",
-    "pages/liveplay/liveplay"
+    "pages/liveplay/liveplay",
+    "pages/collect/collect",
+    "pages/getuser/getuser",
+    "pages/list/list"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -17,30 +20,29 @@
     "navigationBarTitleText": "未来营",
     "navigationBarTextStyle": "black"
   },
-  "sitemapLocation": "sitemap.json"
-  ,
-    "tabBar": {
-      "backgroundColor": "#ffffff",
-      "selectedColor": "#E4393C",
-      "list": [
-        {
-          "pagePath": "pages/index/index",
-          "text": "首页",
-          "iconPath": "/images/home-1.png",
-          "selectedIconPath": "/images/home-2.png"
-        },
-        {
-          "pagePath": "pages/phonelogin/phonelogin",
-          "text": "论坛",
-          "iconPath": "/images/luntan-1.png",
-          "selectedIconPath": "/images/luntan-2.png"
-        },
-        {
-          "pagePath": "pages/my/my",
-          "text": "个人中心",
-          "iconPath": "/images/me-1.png",
-          "selectedIconPath": "/images/me-2.png"
-        }
-      ]
-    }
+  "sitemapLocation": "sitemap.json",
+  "tabBar": {
+    "backgroundColor": "#ffffff",
+    "selectedColor": "#E4393C",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "/images/home-1.png",
+        "selectedIconPath": "/images/home-2.png"
+      },
+      {
+        "pagePath": "pages/search/search",
+        "text": "论坛",
+        "iconPath": "/images/luntan-1.png",
+        "selectedIconPath": "/images/luntan-2.png"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "text": "个人中心",
+        "iconPath": "/images/me-1.png",
+        "selectedIconPath": "/images/me-2.png"
+      }
+    ]
+  }
 }

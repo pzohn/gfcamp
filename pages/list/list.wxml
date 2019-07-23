@@ -1,0 +1,18 @@
+<view class='video_container'>
+  <view class='type-item' wx:for="{{activity}}" wx:key="{{index}}" data-videoid="{{item.id}}">
+    <image class='type-img' src='{{item.img}}' mode='aspectFill'></image>
+    <view class='title'>
+        <text>{{item.name}}</text>
+    </view>
+    <view class='title'>
+        <text>订单时间：2019-07-11 16：22：31</text>
+    </view>
+    <view class='title'>
+        <text>订单编号：6692251153635589</text>
+    </view>
+    <view class='dingdan'>
+        <text style='color:red'>订单状态：未支付</text>
+        <!-- <button class='btn' data-id="{{item.id}}" data-activityid="{{item.activity_id}}" bindtap='typeHandler'>去支付</button> -->
+    </view>
+  </view>
+</view>
