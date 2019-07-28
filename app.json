@@ -1,5 +1,7 @@
 {
   "pages": [
+    "pages/getuser1/getuser1",
+    "pages/getuser/getuser",
     "pages/index/index",
     "pages/phonelogin/phonelogin",
     "pages/detail/detail",
@@ -11,8 +13,8 @@
     "pages/authorize/authorize",
     "pages/liveplay/liveplay",
     "pages/collect/collect",
-    "pages/getuser/getuser",
-    "pages/list/list"
+    "pages/list/list",
+    "pages/luntan/luntan"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -32,7 +34,7 @@
         "selectedIconPath": "/images/home-2.png"
       },
       {
-        "pagePath": "pages/search/search",
+        "pagePath": "pages/luntan/luntan",
         "text": "论坛",
         "iconPath": "/images/luntan-1.png",
         "selectedIconPath": "/images/luntan-2.png"

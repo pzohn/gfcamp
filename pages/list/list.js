@@ -1,3 +1,4 @@
+var app = getApp()
 Page({
   data: {
     activity: []
@@ -8,16 +9,26 @@ Page({
    */
   onLoad: function (options) {
     var page = this;
-    var ids = options.ids;
-    page.initData(ids);
+    var id = options.type;
+    page.initData(id);
   },
 
-  initData: function (ids) {
+  initData: function (id) {
     var page = this;
+    var url = '';
+    if (id == 1){
+      url = 'https://www.gfcamps.cn/getOrderAll'
+    } else if (id == 2){
+      url = 'https://www.gfcamps.cn/getOrderUnPay'
+    } else if (id == 3) {
+      url = 'https://www.gfcamps.cn/getOrderUnUse'
+    } else if (id == 4) {
+      url = 'https://www.gfcamps.cn/getOrderUse'
+    } 
     wx.request({
-      url: 'https://www.gfcamps.cn/getCampactivitiesByCollect',
+      url: url,
       data: {
-        ids: ids
+        phone: app.globalData.phone
       },
       method: 'POST',
       success: function (res) {
@@ -26,8 +37,17 @@ Page({
           var object = new Object();
           object.img = 'https://www.gfcamps.cn/images/' + res.data[index].title_pic;
           object.name = res.data[index].name;
-          object.id = res.data[index].id;
-          object.activity_id = res.data[index].activity_id;
+          object.out_trade_no = res.data[index].out_trade_no;
+          object.status = res.data[index].status;
+          object.date = res.data[index].date;
+          object.color = res.data[index].color;
+          if (object.status == '未支付'){
+            object.payhide = false;
+            object.deletehide = false;
+          }else{
+            object.payhide = true;
+            object.deletehide = true;
+          }
           activity[index] = object;
         }
         page.setData({
@@ -87,14 +107,6 @@ Page({
    */
   onReachBottom: function () {
 
-  },
-
-  typeHandler: function (e) {
-    var id = e.currentTarget.dataset.id;
-    var activity_id = e.currentTarget.dataset.activityid;
-    wx.navigateTo({
-      url: '../detail/detail?id=' + id + '&activity_id=' + activity_id
-    });
   },
 
   /**

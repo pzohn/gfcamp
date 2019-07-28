@@ -22,7 +22,7 @@
 
 <view class='video_container' hidden="{{flag_1}}">
   <view class='type-item' wx:for="{{activity_1}}" wx:key="{{index}}" data-videoid="{{item.id}}">
-    <image class='type-img' src='{{item.img}}' mode='aspectFill'></image>
+    <image class='type-img' src='{{item.img}}' mode='aspectFill' data-id="{{item.id}}" data-activityid="{{item.activity_id}}" bindtap='typeHandler'></image>
     <view class='title'>
         <text>{{item.name}}</text>
         <button class='btn' data-id="{{item.id}}" data-activityid="{{item.activity_id}}" bindtap='typeHandler'>去体验</button>
@@ -32,7 +32,7 @@
 
 <view class='video_container' hidden="{{flag_2}}">
   <view class='type-item' wx:for="{{activity_2}}" wx:key="{{index}}" data-videoid="{{item.id}}">
-    <image class='type-img' src='{{item.img}}' mode='aspectFill'></image>
+    <image class='type-img' src='{{item.img}}' mode='aspectFill' data-id="{{item.id}}" data-activityid="{{item.activity_id}}" bindtap='typeHandler'></image>
     <view class='title'>
         <text>{{item.name}}</text>
         <button class='btn' data-id="{{item.id}}" data-activityid="{{item.activity_id}}" bindtap='typeHandler'>去体验</button>
@@ -43,7 +43,7 @@
 
 <view class='video_container' hidden="{{flag_3}}">
   <view class='type-item' wx:for="{{activity_3}}" wx:key="{{index}}" data-videoid="{{item.id}}">
-    <image class='type-img' src='{{item.img}}' mode='aspectFill'></image>
+    <image class='type-img' src='{{item.img}}' mode='aspectFill' data-id="{{item.id}}" data-activityid="{{item.activity_id}}" bindtap='typeHandler'></image>
     <view class='title'>
         <text>{{item.name}}</text>
         <button class='btn' data-id="{{item.id}}" data-activityid="{{item.activity_id}}" bindtap='typeHandler'>去体验</button>
@@ -53,7 +53,7 @@
 
 <view class='video_container' hidden="{{flag_4}}">
   <view class='type-item' wx:for="{{activity_4}}" wx:key="{{index}}" data-videoid="{{item.id}}">
-    <image class='type-img' src='{{item.img}}' mode='aspectFill'></image>
+    <image class='type-img' src='{{item.img}}' mode='aspectFill' data-id="{{item.id}}" data-activityid="{{item.activity_id}}" bindtap='typeHandler'></image>
     <view class='title'>
         <text>{{item.name}}</text>
         <button class='btn' data-id="{{item.id}}" data-activityid="{{item.activity_id}}" bindtap='typeHandler'>去体验</button>

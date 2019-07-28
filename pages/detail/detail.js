@@ -4,6 +4,7 @@ Page({
     isLike: true,
     price:0,
     detail_id:0,
+    activity_id:0,
     iscollect: false,
     collect_url:'../../images/collect-0.png',
     // banner
@@ -45,7 +46,9 @@ Page({
     }
     var id = options.id;
     var activity_id = options.activity_id;
-    this.setData({ detail_id:id});
+    this.setData({ 
+      detail_id:id,
+      activity_id: activity_id});
     this.initData(id,activity_id);
     this.initCollect();
   },
@@ -180,12 +183,48 @@ Page({
 
   // 立即购买
   immeBuy() {
+    var page = this;
     if (this.isLogin()){
-      wx.showToast({
-        title: '购买成功',
-        icon: 'success',
-        duration: 2000
-      });
+      wx.login({
+        success: res => {
+          var code = res.code;
+          console.log(code);
+          if (code){
+            wx.request({
+              url: 'https://www.gfcamps.cn/onPay',
+              data: {
+                js_code: code,
+                detail_id: page.data.activity_id,
+                phone: app.globalData.phone
+              },
+              method: 'POST',
+              success: function (res) {
+                wx.requestPayment(
+                  {
+                    'timeStamp': res.data.timeStamp,
+                    'nonceStr': res.data.nonceStr,
+                    'package': res.data.package,
+                    'signType': 'MD5',
+                    'paySign': res.data.paySign,
+                    'success': function (res) {
+                      wx.showToast({
+                        title: '购买成功',
+                        icon: 'success',
+                        duration: 5000
+                      });
+                    },
+                    'fail': function (res) {
+                    },
+                    'complete': function (res) {
+                    }
+                  })
+              },
+              fail: function (res) {
+              }
+            })
+          }
+        }
+      })
     }
   },
 

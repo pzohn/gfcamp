@@ -6,7 +6,7 @@
 }
 .searchBg{
   background-color: #E8E8ED;
-  width: 80%;
+  width: 75%;
   display: flex;
   flex-direction: row;
   height: 50px;
@@ -25,62 +25,61 @@
 .holder{
   font-size: 16px;
 }
-.btn{
+.btn1{
   font-size: 16px;
   font-weight: bold;
   line-height: 50px;
   margin-left: 10px;
-  border:1px solid #27c078;
-  width:15%;
+  border:1px solid #3385ff;
+  width:20%;
   text-align: center;
-  background-color: #E8E8ED;
+  background-color: #3385ff;
   border-radius: 3px;
-}
-.hr{
-  border:2px solid #cccccc;
-  opacity: 0.2;
-}
-.item{
-  display: flex;
-  flex-direction: row;
-  margin-left: 10px;
-  margin-bottom: 5px;
+  color: #fff
 }
 
-.desc{
-  margin-left: 50px;
-  line-height: 30px;
-  display: flex;
-  flex-direction: column;
+.video_container{
+  padding:25rpx;
+}
+.type-item{
+  border-radius: 10rpx;
+  position: relative;
+}
+
+.type-item + .type-item{
+  margin-top: 20rpx;
+}
+
+.type-img{
+  width: 100%;
+  height: 290rpx;
+  border-radius: 10rpx;
+  display: block;
 }
 
 .title{
-  font-weight: bold;
-  font-size: 16px;
-}
-
-.count{
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  padding-top: 10px;
+}
+
+.title text{
+  left: 10rpx;
+  bottom: 20rpx;
+  color: black;
+  font-size: 28rpx;
+  font-weight: 500;
+  width: 80%;
+  padding-top: 5px;
+}
+
+.btn{
+  right: 10rpx;
+  width: 70px;
+  background-color:#FF5722;
+  height: 28px;
+  border-radius: 25rpx;
   font-size: 14px;
+  text-align: center;
+  color: white;
 }
-
-.company{
-  color:coral;
-}
-
-.city{
-  color:blue;
-}
-
-.price{
-  color:red;
-  font-size: 16px;
-}
-
-.hr2{
-  height: 2px;
-  background-color: #cccccc;
-  opacity: 0.2;
-}
-

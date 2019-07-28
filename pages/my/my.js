@@ -34,7 +34,7 @@ Page({
     if (this.isLogin()) {
       var id = e.currentTarget.id;
       wx.navigateTo({
-        url: '../list/list?type=' + id + '&ids=11@3'
+        url: '../list/list?type=' + id
       });
     }
   },

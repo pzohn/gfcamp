@@ -39,7 +39,7 @@
   left: 10rpx;
   font-size: 28rpx;
   font-weight: 500;
-  width: 80%;
+  width: 50%;
   padding-top: 5px;
 }
 
@@ -47,6 +47,16 @@
   right: 10rpx;
   width: 70px;
   background-color:#FF5722;
+  height: 28px;
+  border-radius: 25rpx;
+  font-size: 14px;
+  text-align: center;
+  color: white;
+}
+.btn1{
+  right: 10rpx;
+  width: 90px;
+  background-color:rgb(34, 49, 255);
   height: 28px;
   border-radius: 25rpx;
   font-size: 14px;

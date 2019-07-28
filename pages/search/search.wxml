@@ -2,17 +2,21 @@
 <view class="search">
   <view class="searchBg">
     <view>
-      <image src="https://www.yztcc.com/icon/search-1.jpg" style="width:20px;height:21px;"></image>
+      <image src="../../images/search-1.png" style="width:30px;height:30px;padding-top:3px;padding-right:5px;"></image>
     </view>
     <view>
-      <input type="text" placeholder="请输入所要租赁的商品名称" placeholder-class="holder" bindinput="accountInput" value="{{name}}"/>
+      <input type="text" placeholder="请输入关键字" placeholder-class="holder" bindinput="accountInput" value="{{name}}"/>
     </view>
   </view>
-  <view class="btn" bindtap="resetSearch">搜索</view>
+  <view class="btn1" bindtap="resetSearch">搜  索</view>
 </view>
 <loading hidden="{{hiddenLoading}}">正在加载</loading> 
-<view class="hr"></view>
-  <import src="../template/template" />
-  <view class="list">
-    <template is="goods" data="{{array}}" />
+<view class='video_container'>
+  <view class='type-item' wx:for="{{activity}}" wx:key="{{index}}" data-videoid="{{item.id}}">
+    <image class='type-img' src='{{item.img}}' mode='aspectFill'></image>
+    <view class='title'>
+        <text>{{item.name}}</text>
+        <button class='btn' data-id="{{item.id}}" data-activityid="{{item.activity_id}}" bindtap='typeHandler'>去体验</button>
+    </view>
   </view>
+</view>

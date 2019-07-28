@@ -9,7 +9,8 @@ Page({
     flag_1: true,
     flag_2: true,
     flag_3: true,
-    flag_4: true
+    flag_4: true,
+    name:''
   },
 
   /**
@@ -162,8 +163,6 @@ Page({
       });
       return;
     }
-    var app = getApp();
-    app.globalData.searchByname = true;
     wx.navigateTo({
       url: '../search/search?name=' + name
     });

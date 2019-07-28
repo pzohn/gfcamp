@@ -5,14 +5,15 @@
         <text>{{item.name}}</text>
     </view>
     <view class='title'>
-        <text>订单时间：2019-07-11 16：22：31</text>
+        <text>订单时间：{{item.date}}</text>
     </view>
     <view class='title'>
-        <text>订单编号：6692251153635589</text>
+        <text>订单编号：{{item.out_trade_no}}</text>
     </view>
     <view class='dingdan'>
-        <text style='color:red'>订单状态：未支付</text>
-        <!-- <button class='btn' data-id="{{item.id}}" data-activityid="{{item.activity_id}}" bindtap='typeHandler'>去支付</button> -->
+        <text style='color:{{item.color}}'>订单状态：{{item.status}}</text>
+        <button class='btn' data-id="{{item.id}}"  bindtap='pay' hidden='{{item.payhide}}'>去支付</button>
+        <button class='btn1' data-id="{{item.id}}"  bindtap='delete' hidden='{{item.deletehide}}'>删除订单</button>
     </view>
   </view>
 </view>
