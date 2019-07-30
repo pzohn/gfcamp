@@ -1,7 +1,8 @@
 var app = getApp()
 Page({
   data: {
-    activity: []
+    activity: [],
+    page_id:0
   },
 
   /**
@@ -41,6 +42,10 @@ Page({
           object.status = res.data[index].status;
           object.date = res.data[index].date;
           object.color = res.data[index].color;
+          object.id = res.data[index].id;
+          object.activity_id = res.data[index].activity_id;
+          object.trade_id = res.data[index].trade_id;
+          object.charge = res.data[index].charge;
           if (object.status == '未支付'){
             object.payhide = false;
             object.deletehide = false;
@@ -51,7 +56,8 @@ Page({
           activity[index] = object;
         }
         page.setData({
-          activity: activity
+          activity: activity,
+          page_id:id
         });
       },
       fail: function (res) {
@@ -68,6 +74,13 @@ Page({
     })
   },
 
+  typeHandler: function (e) {
+    var id = e.currentTarget.dataset.id;
+    var activity_id = e.currentTarget.dataset.activityid;
+    wx.navigateTo({
+      url: '../detail/detail?id=' + id + '&activity_id=' + activity_id
+    });
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -75,6 +88,110 @@ Page({
 
   },
 
+  delete: function (e) {
+    var id = e.currentTarget.dataset.id;
+    var page = this
+    wx.showModal({
+      title: '删除订单',
+      content: '确认删除订单吗?',
+      success: function (res) {
+        if (res.confirm) {
+          wx.request({
+            url: 'https://www.gfcamps.cn/hideOrder',
+            data: {
+              id: id
+            },
+            method: 'POST',
+            success: function (res) {
+              wx.showToast({
+                title: '删除成功',
+                icon: 'success',
+                duration: 3000,
+                success: function () {
+                  setTimeout(function () {
+                    //要延时执行的代码
+                    wx.redirectTo({
+                      url: '../list/list?type=' + page.data.page_id
+                    })
+                  }, 2000)
+                }
+              });
+            },
+            fail: function (res) {
+              wx.showModal({
+                title: '错误提示',
+                content: '服务器无响应，请联系工作人员!',
+                success: function (res) {
+                  if (res.confirm) {
+                  } else if (res.cancel) {
+                  }
+                }
+              })
+            }
+          })
+        }
+      }
+    })
+  },
+
+  pay: function (e) {
+    var id = e.currentTarget.dataset.id;
+    var page = this
+    wx.showModal({
+      title: '支付订单',
+      content: '确认支付订单吗?',
+      success: function (res) {
+        if (res.confirm) {
+          wx.login({
+            success: res => {
+              var code = res.code;
+              if (code) {
+                wx.request({
+                  url: 'https://www.gfcamps.cn/onRePay',
+                  data: {
+                    js_code: code,
+                    trade_id: id
+                  },
+                  method: 'POST',
+                  success: function (res) {
+                    wx.requestPayment(
+                      {
+                        'timeStamp': res.data.timeStamp,
+                        'nonceStr': res.data.nonceStr,
+                        'package': res.data.package,
+                        'signType': 'MD5',
+                        'paySign': res.data.paySign,
+                        'success': function (res) {
+                          wx.showToast({
+                            title: '支付成功',
+                            icon: 'success',
+                            duration: 3000,
+                            success: function () {
+                              setTimeout(function () {
+                                //要延时执行的代码
+                                wx.redirectTo({
+                                  url: '../list/list?type=3'
+                                })
+                              }, 2000)
+                            }
+                          });
+                        },
+                        'fail': function (res) {
+                        },
+                        'complete': function (res) {
+                        }
+                      })
+                  },
+                  fail: function (res) {
+                  }
+                })
+              }
+            }
+          })
+        }
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面显示
    */

@@ -208,7 +208,7 @@ Page({
                     'paySign': res.data.paySign,
                     'success': function (res) {
                       wx.showToast({
-                        title: '购买成功',
+                        title: '支付成功',
                         icon: 'success',
                         duration: 5000
                       });
