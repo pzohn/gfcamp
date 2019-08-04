@@ -1,8 +1,10 @@
 {
   "pages": [
+    "pages/index/index",
+    "pages/userinfo/userinfo",
+    "pages/gundong/gundong",
     "pages/getuser1/getuser1",
     "pages/getuser/getuser",
-    "pages/index/index",
     "pages/phonelogin/phonelogin",
     "pages/detail/detail",
     "pages/classes/classes",

@@ -1,0 +1,23 @@
+
+.scroll-box{display: flex;flex-wrap: nowrap;}
+.menu-tab{
+  width: 180rpx;
+  text-align: center;
+  height: 100%;
+  color: #666;
+  border-right:1rpx solid #999
+  
+}
+.item-tab{
+  font-size:28rpx;
+  padding:8rpx;
+}
+.cont-box{
+  border-top: 1px solid;
+  box-sizing: border-box;
+}
+.item-act{
+  background: linear-gradient(to bottom right, #6C53B1 , #8B2EDF);
+  color: #fff;
+  border-radius: 100px;
+}

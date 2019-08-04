@@ -13,20 +13,23 @@ Page({
         "iconUrl": 'https://www.hattonstar.com/gfcamp/info.png',
         "iconText": '宝宝信息',
         "id":1
-      },
+      }
+    ]
+  },
+
+/*
       {
         "iconUrl": 'https://www.hattonstar.com/gfcamp/card.png',
         "iconText": '优惠卷',
         "id": 2
       },
+      ,
       {
         "iconUrl": 'https://www.hattonstar.com/gfcamp/suggest.png',
         "iconText": '意见反馈',
         "id": 3
       }
-    ]
-  },
-
+*/
   /**
    * 生命周期函数--监听页面加载
    */
@@ -125,7 +128,7 @@ Page({
     var index = e.currentTarget.id;
     if (index == 1){
       wx.navigateTo({
-        url: '../useredit/useredit'
+        url: '../userinfo/userinfo'
       })
     } else if (index == 2){
       wx.navigateTo({
