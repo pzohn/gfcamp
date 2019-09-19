@@ -1,5 +1,8 @@
 <!--顶部轮播图 begin-->
 <swiper class="lunbo" id="lunbo" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+  <swiper-item>  
+    <video id="myVideo" src='https://www.gfcamps.cn/video/ceshi1.mp4' bindtap="bofang" controls='true'></video>
+  </swiper-item>  
   <block wx:for="{{imgUrls}}" wx:key="{{imgUrls}}">
       <swiper-item>
         <image src="{{item}}" class="slide-image"/>

@@ -11,7 +11,7 @@ Page({
 
     indicatorDots: true, //是否显示面板指示点
     autoplay: true, //是否自动切换
-    interval: 3000, //自动切换时间间隔,3s
+    interval: 6000, //自动切换时间间隔,3s
     duration: 1000, //  滑动动画时长1s
 
     // 商品详情介绍

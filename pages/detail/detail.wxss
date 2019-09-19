@@ -20,6 +20,12 @@ image{width: 100%;vertical-align: top;display: block;}
 .lunbo .wx-swiper-dots.wx-swiper-dots-horizontal{
       margin-bottom: 10rpx;
 }
+
+.lunbo video {
+  height: 100%;
+  width: 100%;
+}
+
 .lunbo .wx-swiper-dot{
     width: 14rpx;
     display: inline-flex;
