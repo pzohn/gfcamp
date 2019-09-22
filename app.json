@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/certmake/certmake",
     "pages/userinfo/userinfo",
     "pages/gundong/gundong",
     "pages/getuser1/getuser1",
@@ -16,7 +17,9 @@
     "pages/liveplay/liveplay",
     "pages/collect/collect",
     "pages/list/list",
-    "pages/luntan/luntan"
+    "pages/luntan/luntan",
+    "pages/newaddress/newaddress",
+    "pages/editaddress/editaddress"
   ],
   "window": {
     "backgroundTextStyle": "light",

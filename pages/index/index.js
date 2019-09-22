@@ -19,11 +19,13 @@ Page({
   onLoad: function (options) {
     var app = getApp();
     var loginCode = wx.getStorageSync('phone');
-    if (loginCode == "") {
+    var loginId = wx.getStorageSync('login_id');
+    if (loginCode == "" || loginId == "") {
       app.globalData.loginFlag = false;
     } else {
       app.globalData.loginFlag = true;
       app.globalData.phone = loginCode;
+      app.globalData.login_id = loginId;
     }
     var page = this;
     page.initData(1);

@@ -132,6 +132,7 @@ Page({
           if (res.data != 0){
             console.log(res.data);
             wx.setStorageSync('phone', page.data.phone);
+            wx.setStorageSync('login_id', res.data);
             app.globalData.loginFlag = true;
             wx.navigateBack({
               delta: 1
