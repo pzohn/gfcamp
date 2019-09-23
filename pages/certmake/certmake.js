@@ -6,8 +6,10 @@ Page({
   data: {
     detail_id: 0,
     activity_id: 0,
+    address_id:0,
     address_info: {}, //地址信息
     goods_info: [], //商品信息
+    address_info:[],//地址信息
     goods_count: '', //商品件数
     goods_freight: '', //运费
     goods_price: '', //商品价格
@@ -28,11 +30,11 @@ Page({
   bindaddress: function () {
     if (this.data.hasAddr == 1) {
       wx.navigateTo({
-        url: '../editaddress/editaddress'
+        url: '../editaddress/editaddress?id=' + this.data.address_id + '&activity_id=' + this.data.activity_id + '&detail_id=' + this.data.detail_id
       })
     } else {
       wx.navigateTo({
-        url: '../newaddress/newaddress'
+        url: '../newaddress/newaddress?activity_id=' + this.data.activity_id + '&detail_id=' + this.data.detail_id
       })
     }
 
@@ -46,121 +48,49 @@ Page({
     })
   },
 
-
-  /**
-   * 支付订单
-   */
-  payOrder: function (orderHash, order_id) {
-    var that = this;
-    var order_hash = orderHash;
-    console.log(order_hash)
-    //呼起微信支付
-    MBC.Ajax({
-      url: api.getPayConfig,
-      is_login: true,
-      data: {
-        hash: order_hash,
-        platform: 'miniProgram',
-        channel: 'weixin'
-      },
-      success: function (res) {
-        wx.requestPayment({
-          'timeStamp': res.result.parameters.timeStamp,
-          'nonceStr': res.result.parameters.nonceStr,
-          'package': res.result.parameters.package,
-          'signType': 'MD5',
-          'paySign': res.result.parameters.paySign,
-          'success': function (res) {
-            console.log(res);
-            MBC.Ajax({
-              url: api.payOrder,
-              is_login: true,
-              data: {
-                hash: order_hash
-              },
-              success: function (res) {
-                console.log(res)
-                var status = res.result.status;
-                if (status == 2) {
-                  wx.showToast({
-                    title: '支付成功',
-                  });
-                  wx.redirectTo({
-                    url: '../orderInfo/orderInfo?order_id=' + order_id,
-                  })
-
-                } else {
-                  wx.showToast({
-                    title: '支付失败，请稍后刷新',
-                  })
-                }
-
-              }
-            })
-          },
-          'fail': function (res) {
-            console.log(res);
-            wx.redirectTo({
-              url: '../orderInfo/orderInfo?order_id=' + order_id,
-            })
-          }
-        })
-      }
-    })
-
-  },
   //  提交订单
   bindSubmitOrder: function (e) {
-    var form_id = e.detail.formId;
-    var that = this;
-    var type = this.data.type;
-    if (type == 1) {
-      MBC.Ajax({
-        url: api.submit,
-        is_login: true,
-        data: {
-          form_id: form_id,
-          order_message: this.data.order_message, //地址信息
-          address_id: this.data.address_info.address_id, //地址id
-          receiver_name: this.data.address_info.receiver_name, //收件人姓名
-          receiver_phone: this.data.address_info.receiver_phone, //收件手机号
-          receiver_city: this.data.address_info.city, //收件城市
-          receiver_address_details: this.data.address_info.detail_address, //收件详细地址
-          type: this.data.type, //选项
-          goods_id: this.data.goods_id, //商品id
-          goods_num: this.data.goods_num, //商品数量
-        },
-        success: function (res) {
-          that.payOrder(res.result.hash, res.result.order_id);
-        },
-        fail: function (res) {
-
+    var page = this;
+    wx.login({
+      success: res => {
+        var code = res.code;
+        console.log(code);
+        if (code) {
+          wx.request({
+            url: 'https://www.gfcamps.cn/onPay',
+            data: {
+              js_code: code,
+              detail_id: page.data.activity_id,
+              phone: app.globalData.phone
+            },
+            method: 'POST',
+            success: function (res) {
+              wx.requestPayment(
+                {
+                  'timeStamp': res.data.timeStamp,
+                  'nonceStr': res.data.nonceStr,
+                  'package': res.data.package,
+                  'signType': 'MD5',
+                  'paySign': res.data.paySign,
+                  'success': function (res) {
+                    wx.showToast({
+                      title: '支付成功',
+                      icon: 'success',
+                      duration: 5000
+                    });
+                  },
+                  'fail': function (res) {
+                  },
+                  'complete': function (res) {
+                  }
+                })
+            },
+            fail: function (res) {
+            }
+          })
         }
-      })
-    } else if (type == 2) {
-      MBC.Ajax({
-        url: api.submit,
-        is_login: true,
-        data: {
-          form_id: form_id,
-          order_message: this.data.order_message, //地址信息
-          address_id: this.data.address_info.address_id, //地址id
-          receiver_name: this.data.address_info.receiver_name, //收件人姓名
-          receiver_phone: this.data.address_info.receiver_phone, //收件手机号
-          receiver_city: this.data.address_info.city, //收件城市
-          receiver_address_details: this.data.address_info.detail_address, //收件详细地址
-          type: this.data.type, //选项
-          cart_ids: this.data.cart_ids, //购物车id
-        },
-        success: function (res) {
-          that.payOrder(res.result.hash, res.result.order_id);
-        },
-        fail: function (res) {
-
-        }
-      })
-    }
-
+      }
+    })
   },
 
   //返回上一页
@@ -175,9 +105,11 @@ Page({
   onLoad: function (options) {
     var id = options.id;
     var activity_id = options.activity_id;
+    var num = options.num;
     this.setData({
       detail_id: id,
-      activity_id: activity_id
+      activity_id: activity_id,
+      goods_count:num
     });
     this.initData(id, activity_id);
   },
@@ -185,22 +117,61 @@ Page({
   initData: function (id, activity_id) {
     var page = this;
     wx.request({
-      url: 'https://www.gfcamps.cn/getWxInfoById',
+      url: 'https://www.gfcamps.cn/makeTrades',
       data: {
         id: id,
-        activity_id: activity_id
+        activity_id: activity_id,
+        login_id: app.globalData.login_id
       },
       method: 'POST',
       success: function (res) {
+        console.log(res);
         var goods_info = [];
         var object = new Object();
-        object.title = res.data.name;
+        object.title = res.data.name
         object.price = res.data.charge;
         object.image = 'https://www.gfcamps.cn/images/' + res.data.title_pic;
         goods_info[0] = object;
+        var total_price = object.price * page.data.goods_count;
         page.setData({
-          goods_info: goods_info
+          goods_info: goods_info,
+          total_price: total_price
         });
+        if (res.data.address){
+          var address_info = [];
+          // for (var index in res.data.address) {
+          //   var object = new Object();
+          //   object.id = res.data.address[index].id;
+          //   object.name = res.data.address[index].name;
+          //   object.phone = res.data.address[index].phone;
+          //   object.province = res.data.address[index].province;
+          //   object.city = res.data.address[index].city;
+          //   object.area = res.data.address[index].area;
+          //   object.detail = res.data.address[index].detail;
+          //   object.login_id = res.data.address[index].login_id;
+          //   address_info[index] = object;
+          // }
+          var object = new Object();
+          object.id = res.data.address.id;
+          object.name = res.data.address.name;
+          object.phone = res.data.address.phone;
+          object.province = res.data.address.province;
+          object.city = res.data.address.city;
+          object.area = res.data.address.area;
+          object.detail = res.data.address.detail;
+          object.login_id = res.data.address.login_id;
+          address_info[0] = object;
+          page.setData({
+            address_info: address_info,
+            hasAddr: true,
+            address_id: object.id
+          });
+          
+        }else{
+          page.setData({
+            hasAddr: false
+          });
+        }
       },
       fail: function (res) {
         wx.showModal({
@@ -232,30 +203,6 @@ Page({
     var type = that.data.type;
     var cart_ids = that.data.cart_ids;
     console.log(that.data.address_id);
-    // if (type == 1) {
-
-    // } else if (type == 2) {
-
-    // }
-    if (that.data.address_id) {
-      // 获取指定地址信息
-      MBC.Ajax({
-        url: api.getOne,
-        is_login: true,
-        data: {
-          address_id: that.data.address_id
-        },
-        success: function (res) {
-          that.setData({
-            address_info: res.result.address_info
-          })
-        },
-        fail: function (res) {
-
-        }
-      })
-    }
-
   },
 
   /**

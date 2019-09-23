@@ -10,7 +10,6 @@
 		<input placeholder="请输入手机号码" type="number" style="width:64%;" bindinput="accountInput" id = "2"></input>
 		<view class="address_right" style="width:13%;">
 			<text>+86</text>
-			<image src="/images/next_page.jpg"></image>
 		</view>
 	</view>
 </view>
@@ -19,10 +18,7 @@
 		<view class="input_note">所在地区:</view>
 		
 		<picker mode="region" class="" value="{{region}}" custom-item="{{customItem}}" bindchange="bindRegionChange" style="width:77%;position:relative;right:0rpx;align-items:center;">
-		<view mode="region" style="width:95%;float:left;font-size:30rpx;color:#000000;">{{region[0]}},{{region[1]}},{{region[2]}}</view>
-		<view class="next_page" style="width:5%;float:right;">
-				<image src="/images/next_page.jpg" style=""></image>
-			</view>
+		<view mode="region" style="width:95%;float:left;font-size:30rpx;color:#000000;">{{region[0]}} {{region[1]}} {{region[2]}}</view>
 		</picker>
 	</view>
 </view>

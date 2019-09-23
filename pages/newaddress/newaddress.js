@@ -5,19 +5,27 @@ const app = getApp()
 Page({
   data: {
     region: [],
-    default_flag:false,
+    default_flag:true,
     name:'',
     phone:'',
-    detail:''
+    detail:'',
+    detail_id: 0,
+    activity_id: 0
   },
 
   onLoad: function (options) {
-    var have = options.have;
-    if (have == 0){
-      this.setData({
-        default_flag: true
-      })
-    }
+    // var have = options.have;
+    // if (have == 0){
+    //   this.setData({
+    //     default_flag: true
+    //   })
+    // }
+    var detail_id = options.detail_id;
+    var activity_id = options.activity_id;
+    this.setData({
+      detail_id: detail_id,
+      activity_id: activity_id
+    });
     this.initRegion();
   },
 
@@ -39,7 +47,7 @@ Page({
       method: 'POST',
       success: function (res) {
         wx.navigateTo({
-          url: '../address/address'
+          url: '../certmake/certmake?id=' + page.data.detail_id + '&activity_id=' + page.data.activity_id
         })
       },
       fail: function (res) {
@@ -74,10 +82,13 @@ Page({
 
   initRegion: function () {
     var arry = [];
-    var app = getApp();
-    arry[0] = app.globalData.province;
-    arry[1] = app.globalData.city;
-    arry[2] = app.globalData.district;
+    // var app = getApp();
+    // arry[0] = app.globalData.province;
+    // arry[1] = app.globalData.city;
+    // arry[2] = app.globalData.district;
+    arry[0] = '河南省';
+    arry[1] = '许昌市';
+    arry[2] = '魏都区';
     this.setData({region:arry});
   },
 

@@ -227,52 +227,8 @@ Page({
   buttonOk() {
     var page = this;
     wx.navigateTo({
-      url: '../certmake/certmake?id=' + page.data.id + '&activity_id=' + page.data.activity_id
+      url: '../certmake/certmake?id=' + page.data.detail_id + '&activity_id=' + page.data.activity_id + '&num=' + page.data.num
     })
-    return
-    var page = this;
-    if (this.isLogin()) {
-      wx.login({
-        success: res => {
-          var code = res.code;
-          console.log(code);
-          if (code) {
-            wx.request({
-              url: 'https://www.gfcamps.cn/onPay',
-              data: {
-                js_code: code,
-                detail_id: page.data.activity_id,
-                phone: app.globalData.phone
-              },
-              method: 'POST',
-              success: function (res) {
-                wx.requestPayment(
-                  {
-                    'timeStamp': res.data.timeStamp,
-                    'nonceStr': res.data.nonceStr,
-                    'package': res.data.package,
-                    'signType': 'MD5',
-                    'paySign': res.data.paySign,
-                    'success': function (res) {
-                      wx.showToast({
-                        title: '支付成功',
-                        icon: 'success',
-                        duration: 5000
-                      });
-                    },
-                    'fail': function (res) {
-                    },
-                    'complete': function (res) {
-                    }
-                  })
-              },
-              fail: function (res) {
-              }
-            })
-          }
-        }
-      })
-    }
   },
 
   home() {
