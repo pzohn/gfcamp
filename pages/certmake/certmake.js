@@ -21,7 +21,6 @@ Page({
     },
     statusBarHeight: app.globalData.statusBarHeight,
     goods_id: '', //商品id
-    goods_num: '', //商品数量
     hasAddr: false, //选项
     order_message: '', //订单留言
     cart_ids: [], // 购物车商品id
@@ -61,7 +60,9 @@ Page({
             data: {
               js_code: code,
               detail_id: page.data.activity_id,
-              phone: app.globalData.phone
+              phone: app.globalData.phone,
+              num: page.data.goods_count,
+              address_id:page.data.address_id
             },
             method: 'POST',
             success: function (res) {
@@ -197,12 +198,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function (options) {
-    var that = this;
-    var goods_id = that.data.goods_id;
-    var goods_num = that.data.goods_num;
-    var type = that.data.type;
-    var cart_ids = that.data.cart_ids;
-    console.log(that.data.address_id);
+
   },
 
   /**

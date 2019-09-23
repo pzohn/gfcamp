@@ -19,7 +19,8 @@
     "pages/list/list",
     "pages/luntan/luntan",
     "pages/newaddress/newaddress",
-    "pages/editaddress/editaddress"
+    "pages/editaddress/editaddress",
+    "pages/cart/cart"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -39,7 +40,7 @@
         "selectedIconPath": "/images/home-2.png"
       },
       {
-        "pagePath": "pages/luntan/luntan",
+        "pagePath": "pages/cart/cart",
         "text": "论坛",
         "iconPath": "/images/luntan-1.png",
         "selectedIconPath": "/images/luntan-2.png"

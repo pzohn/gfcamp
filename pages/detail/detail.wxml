@@ -62,13 +62,13 @@
     <image bindtap="collect" src="{{collect_url}}" />
     <text>收藏</text>
   </view>
-  <button  class='button-green' formType="submit">
-    <text>￥{{price}}</text>
+  <button  class='button-green' bindtap="immeCert" formType="submit">
+    <text>加入购物车</text>
     <!-- <text>单独购</text> -->
   </button>
   <button  class='button-red' bindtap="immeBuy" formType="submit">
     <!-- <text>￥29.9</text> -->
-    <text>购买</text>
+    <text>立即购买</text>
   </button>
 </view>
 

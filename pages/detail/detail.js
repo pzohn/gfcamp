@@ -43,6 +43,7 @@ Page({
     // guigeList: [{ guige: '100', price: '150' }, { guige: '200', price: '150' }, { guige: '300', price: '150' }],
     guigeList: [{ guige: '默认规格', price: '0' }],
     num: 1,//初始数量
+    buy_flag:false
   },
 
   onLoad: function (options) {
@@ -194,7 +195,18 @@ Page({
 
   // 立即购买
   immeBuy() {
-    this.setData({ showModalStatus:true})
+    this.setData({ 
+      showModalStatus:true,
+      buy_flag:true
+    })
+  },
+
+  // 加入购物车
+  immeCert() {
+    this.setData({ 
+      showModalStatus: true,
+      buy_flag: false
+    })
   },
 
   initCollectUrl() {
@@ -226,9 +238,42 @@ Page({
 
   buttonOk() {
     var page = this;
-    wx.navigateTo({
-      url: '../certmake/certmake?id=' + page.data.detail_id + '&activity_id=' + page.data.activity_id + '&num=' + page.data.num
-    })
+    if (page.data.buy_flag == true){
+      wx.navigateTo({
+        url: '../certmake/certmake?id=' + page.data.detail_id + '&activity_id=' + page.data.activity_id + '&num=' + page.data.num
+      })
+    }else{
+      wx.request({
+        url: 'https://www.gfcamps.cn/certInsert',
+        data: {
+          username: app.globalData.phone,
+          id: page.data.detail_id,
+          count: page.data.num
+        },
+        method: 'POST',
+        success: function (res) {
+          page.setData({
+            showModalStatus: false
+          })
+          wx.showToast({
+            title: '加入成功',
+            icon: 'success',
+            duration: 2000
+          });
+        },
+        fail: function (res) {
+          wx.showModal({
+            title: '错误提示',
+            content: '服务器无响应，请联系工作人员!',
+            success: function (res) {
+              if (res.confirm) {
+              } else if (res.cancel) {
+              }
+            }
+          })
+        }
+      })
+    }
   },
 
   home() {
