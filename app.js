@@ -49,6 +49,7 @@ App({
     phone: '',
     login_id: 0,
     loginFlag: false,
-    authorizeFlag:false
+    authorizeFlag:false,
+    certlist:[]
   }
 })

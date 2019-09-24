@@ -240,7 +240,7 @@ Page({
     var page = this;
     if (page.data.buy_flag == true){
       wx.navigateTo({
-        url: '../certmake/certmake?id=' + page.data.detail_id + '&activity_id=' + page.data.activity_id + '&num=' + page.data.num
+        url: '../certmake/certmake?type=trade' + '&id=' + page.data.detail_id + '&activity_id=' + page.data.activity_id + '&num=' + page.data.num
       })
     }else{
       wx.request({

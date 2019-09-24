@@ -20,24 +20,6 @@ Page({
     //   num: 1,
     //   price: 180,
     //   selected: true
-    // },
-    // {
-    //   id: 2,
-    //   title: '伊芙琳玫瑰护手霜',
-    //   image: '../../image/shop_car/list_tab1.png',
-    //   pro_name: "25g",
-    //   num: 1,
-    //   price: 62,
-    //   selected: true
-    // },
-    // {
-    //   id: 2,
-    //   title: '燕麦山羊乳舒缓护手霜',
-    //   image: '../../image/shop_car/list_tab2.png',
-    //   pro_name: "75ml",
-    //   num: 1,
-    //   price: 175,
-    //   selected: true
     // }
     ],
     // 金额
@@ -55,7 +37,6 @@ Page({
       app.globalData.loginFlag = true;
       app.globalData.phone = loginCode;
     }
-    this.initData();
   },
 
   initData: function () {
@@ -67,6 +48,7 @@ Page({
       },
       method: 'POST',
       success: function (res) {
+        console.log(res);
         var list = [];
         for (var i in res.data) {
           var object = new Object();
@@ -102,6 +84,12 @@ Page({
   },
 
   onShow() {
+    this.setData({
+      edit_show: "none",
+      edit_name: "编辑",
+      show_edit: "block"
+    })
+    this.initData();
     wx.showToast({
       title: '加载中',
       icon: "loading",
@@ -198,7 +186,7 @@ Page({
   deleteCert(id) {
     var page = this;
     wx.request({
-      url: 'https://www.hattonstar.com/certdelete',
+      url: 'https://www.gfcamps.cn/certdelete',
       data: {
         id: id
       },
@@ -381,25 +369,60 @@ Page({
   // 提交订单
   btn_submit_order: function () {
     var that = this;
-    console.log(that.data.totalPrice);
+    var updatelist = [];
+    var certlist = [];
+    var i = 0;
+    var j = 0;
+    for (var index in that.data.list){
+      var item = that.data.list[index];
+      if (item.selected == false){
+        updatelist[i] = item;
+        i ++;
+      }else{
+        certlist[j] = item;
+        j ++;
+      }
+    }
+    this.updateCerts(updatelist);
 
-    // 调起支付
-    // wx.requestPayment(
-    //   {
-    //     'timeStamp': '',
-    //     'nonceStr': '',
-    //     'package': '',
-    //     'signType': 'MD5',
-    //     'paySign': '',
-    //     'success': function (res) { },
-    //     'fail': function (res) { },
-    //     'complete': function (res) { }
-    //   })
-    wx.showModal({
-      title: '提示',
-      content: '合计金额-' + that.data.totalPrice + "暂未开发",
+    app.globalData.certlist = certlist;
+    wx.navigateTo({
+      url: '../certmake/certmake?type=cert'
     })
   },
+
+  updateCerts(list) {
+    for (var index in list) {
+      var item = list[index];
+      this.updateCert(item);
+    }
+  },
+
+  updateCert(item) {
+    wx.request({
+      url: 'https://www.gfcamps.cn/certupdate',
+      data: {
+        id: item.id,
+        count: item.num
+      },
+      method: 'POST',
+      success: function (res) {
+
+      },
+      fail: function (res) {
+        wx.showModal({
+          title: '错误提示',
+          content: '服务器无响应，请联系工作人员!',
+          success: function (res) {
+            if (res.confirm) {
+            } else if (res.cancel) {
+            }
+          }
+        })
+      }
+    })
+  },
+
   // 收藏
   btn_collert: function () {
     wx.showToast({

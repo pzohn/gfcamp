@@ -28,7 +28,7 @@
       </view>
       <view class="goods_num">
         <text class="goods_num_price">￥{{item.price}}</text>
-        <text>×{{goods_count}}</text>
+        <text>×{{item.count}}</text>
       </view>
   </view>
 </view>
