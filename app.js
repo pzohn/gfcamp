@@ -5,6 +5,7 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs);
+    var that = this;
 
     // 登录
     wx.login({
@@ -17,7 +18,23 @@ App({
           },
           method: 'POST',
           success: function (res) {
-            console.log(res);
+            that.globalData.openid = res.data.openid;
+
+            wx.request({
+              url: 'https://www.gfcamps.cn/makeWxUser',
+              data: {
+                openid: that.globalData.openid,
+                nikename: that.globalData.userInfo.nickName,
+                url: that.globalData.userInfo.avatarUrl
+              },
+              method: 'POST',
+              success: function (res) {
+               
+              },
+              fail: function (res) {
+              }
+            })
+
           },
           fail: function (res) {
           }
@@ -62,6 +79,7 @@ App({
     login_id: 0,
     loginFlag: false,
     authorizeFlag:false,
-    certlist:[]
+    certlist:[],
+    openid:''
   }
 })

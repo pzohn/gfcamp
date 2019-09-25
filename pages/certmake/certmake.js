@@ -93,7 +93,6 @@ Page({
     wx.login({
       success: res => {
         var code = res.code;
-        console.log(code);
         if (code) {
           wx.request({
             url: 'https://www.gfcamps.cn/onPay',
@@ -135,7 +134,64 @@ Page({
   },
 
   dealCert() {
-    delCerts(app.globalData.certlist);
+    this.delCerts(app.globalData.certlist);
+
+    var certInfo = '';
+    for (var index in app.globalData.certlist) {
+      certInfo += app.globalData.certlist[index].shoppingid + ',' + app.globalData.certlist[index].num;
+      certInfo += '@';
+    }
+    certInfo = certInfo.substr(0, certInfo.length - 1);
+
+    var page = this;
+    var body = '';
+    if (page.data.goods_info.length == 1){
+      body = page.data.goods_info[0].title;
+    } else if (page.data.goods_info.length > 1){
+      body = page.data.goods_info[0].title + '...'
+    }
+    wx.login({
+      success: res => {
+        var code = res.code;
+        if (code) {
+          wx.request({
+            url: 'https://www.gfcamps.cn/onPayForCert',
+            data: {
+              js_code: code,
+              certInfo: certInfo,
+              phone: app.globalData.phone,
+              address_id: page.data.address_id,
+              charge: page.data.total_price,
+              body: body
+            },
+            method: 'POST',
+            success: function (res) {
+              wx.requestPayment(
+                {
+                  'timeStamp': res.data.timeStamp,
+                  'nonceStr': res.data.nonceStr,
+                  'package': res.data.package,
+                  'signType': 'MD5',
+                  'paySign': res.data.paySign,
+                  'success': function (res) {
+                    wx.showToast({
+                      title: '支付成功',
+                      icon: 'success',
+                      duration: 5000
+                    });
+                  },
+                  'fail': function (res) {
+                  },
+                  'complete': function (res) {
+                  }
+                })
+            },
+            fail: function (res) {
+            }
+          })
+        }
+      }
+    })
   },
 
 

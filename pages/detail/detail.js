@@ -247,7 +247,7 @@ Page({
         url: 'https://www.gfcamps.cn/certInsert',
         data: {
           username: app.globalData.phone,
-          id: page.data.detail_id,
+          id: page.data.activity_id,
           count: page.data.num
         },
         method: 'POST',
