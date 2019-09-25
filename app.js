@@ -10,6 +10,18 @@ App({
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        wx.request({
+          url: 'https://www.gfcamps.cn/getWxUser',
+          data: {
+            js_code: res.code
+          },
+          method: 'POST',
+          success: function (res) {
+            console.log(res);
+          },
+          fail: function (res) {
+          }
+        })
       }
     })
     // 获取用户信息

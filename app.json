@@ -1,11 +1,11 @@
 {
   "pages": [
+    "pages/getuser1/getuser1",
+    "pages/getuser/getuser",
     "pages/index/index",
     "pages/certmake/certmake",
     "pages/userinfo/userinfo",
     "pages/gundong/gundong",
-    "pages/getuser1/getuser1",
-    "pages/getuser/getuser",
     "pages/phonelogin/phonelogin",
     "pages/detail/detail",
     "pages/classes/classes",
@@ -13,7 +13,6 @@
     "pages/myclasses/myclasses",
     "pages/my/my",
     "pages/search/search",
-    "pages/authorize/authorize",
     "pages/liveplay/liveplay",
     "pages/collect/collect",
     "pages/list/list",
