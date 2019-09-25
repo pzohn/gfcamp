@@ -238,41 +238,46 @@ Page({
 
   buttonOk() {
     var page = this;
-    if (page.data.buy_flag == true){
-      wx.navigateTo({
-        url: '../certmake/certmake?type=trade' + '&id=' + page.data.detail_id + '&activity_id=' + page.data.activity_id + '&num=' + page.data.num
-      })
-    }else{
-      wx.request({
-        url: 'https://www.gfcamps.cn/certInsert',
-        data: {
-          username: app.globalData.phone,
-          id: page.data.activity_id,
-          count: page.data.num
-        },
-        method: 'POST',
-        success: function (res) {
-          page.setData({
-            showModalStatus: false
-          })
-          wx.showToast({
-            title: '加入成功',
-            icon: 'success',
-            duration: 2000
-          });
-        },
-        fail: function (res) {
-          wx.showModal({
-            title: '错误提示',
-            content: '服务器无响应，请联系工作人员!',
-            success: function (res) {
-              if (res.confirm) {
-              } else if (res.cancel) {
+    if (page.isLogin()){
+      if (page.data.buy_flag == true) {
+        wx.navigateTo({
+          url: '../certmake/certmake?type=trade' + '&id=' + page.data.detail_id + '&activity_id=' + page.data.activity_id + '&num=' + page.data.num
+        })
+      } else {
+        console.log(app.globalData.phone)
+        console.log(page.data.activity_id)
+        console.log(page.data.num)
+        wx.request({
+          url: 'https://www.gfcamps.cn/certInsert',
+          data: {
+            username: app.globalData.phone,
+            id: page.data.activity_id,
+            count: page.data.num
+          },
+          method: 'POST',
+          success: function (res) {
+            page.setData({
+              showModalStatus: false
+            })
+            wx.showToast({
+              title: '加入成功',
+              icon: 'success',
+              duration: 2000
+            });
+          },
+          fail: function (res) {
+            wx.showModal({
+              title: '错误提示',
+              content: '服务器无响应，请联系工作人员!',
+              success: function (res) {
+                if (res.confirm) {
+                } else if (res.cancel) {
+                }
               }
-            }
-          })
-        }
-      })
+            })
+          }
+        })
+      }
     }
   },
 
