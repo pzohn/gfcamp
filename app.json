@@ -16,6 +16,7 @@
     "pages/liveplay/liveplay",
     "pages/collect/collect",
     "pages/list/list",
+    "pages/listdetail/listdetail",
     "pages/luntan/luntan",
     "pages/newaddress/newaddress",
     "pages/editaddress/editaddress",

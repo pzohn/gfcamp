@@ -80,6 +80,7 @@ App({
     loginFlag: false,
     authorizeFlag:false,
     certlist:[],
-    openid:''
+    openid:'',
+    listdetail:{}
   }
 })

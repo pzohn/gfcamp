@@ -36,16 +36,34 @@ Page({
         var activity = [];
         for (var index in res.data) {
           var object = new Object();
-          object.img = 'https://www.gfcamps.cn/images/' + res.data[index].title_pic;
-          object.name = res.data[index].name;
+          object.count = res.data[index].count;
+          if (res.data[index].count == 1){
+            object.img = 'https://www.gfcamps.cn/images/' + res.data[index].detail[0].title_pic;
+            object.name = res.data[index].detail[0].name;
+            object.activity_id = res.data[index].detail[0].activity_id;
+            object.wx_id = res.data[index].detail[0].wx_id;
+            object.num = res.data[index].detail[0].num;
+            object.charge = res.data[index].detail[0].charge;
+          }else{
+            var detail = [];
+            for (var i in res.data[index].detail){
+              var objectDetail = new Object();
+              objectDetail.img = 'https://www.gfcamps.cn/images/' + res.data[index].detail[i].title_pic;
+              objectDetail.activity_id = res.data[index].detail[i].activity_id;
+              objectDetail.wx_id = res.data[index].detail[i].wx_id;
+              objectDetail.num = res.data[index].detail[i].num;
+              objectDetail.name = res.data[index].detail[i].name;
+              objectDetail.charge = res.data[index].detail[i].charge;
+              detail[i] = objectDetail;
+            }
+            object.detail = detail;
+          }
           object.out_trade_no = res.data[index].out_trade_no;
           object.status = res.data[index].status;
           object.date = res.data[index].date;
           object.color = res.data[index].color;
-          object.id = res.data[index].id;
-          object.activity_id = res.data[index].activity_id;
           object.trade_id = res.data[index].trade_id;
-          object.charge = res.data[index].charge;
+          object.address = res.data[index].address;
           if (object.status == '未支付'){
             object.payhide = false;
             object.deletehide = false;
@@ -53,6 +71,7 @@ Page({
             object.payhide = true;
             object.deletehide = true;
           }
+          object.index = index;
           activity[index] = object;
         }
         page.setData({
@@ -73,12 +92,12 @@ Page({
       }
     })
   },
-
-  typeHandler: function (e) {
-    var id = e.currentTarget.dataset.id;
-    var activity_id = e.currentTarget.dataset.activityid;
+  
+  gotoDetail(e){
+    var index = e.currentTarget.dataset.index;
+    app.globalData.listdetail = this.data.activity[index];
     wx.navigateTo({
-      url: '../detail/detail?id=' + id + '&activity_id=' + activity_id
+      url: '../listdetail/listdetail'
     });
   },
   /**
@@ -86,6 +105,15 @@ Page({
    */
   onReady: function () {
 
+  },
+
+  getStatus(id) {
+    if (id == 1){
+      return '待付款';
+    }
+    else if (id == 2) {
+      return '待发货';
+    }
   },
 
   delete: function (e) {

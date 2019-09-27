@@ -1,9 +1,20 @@
 <view class='video_container'>
-  <view class='type-item' wx:for="{{activity}}" wx:key="{{index}}" data-videoid="{{item.id}}">
-    <image class='type-img' src='{{item.img}}' mode='aspectFill' data-id="{{item.id}}" data-activityid="{{item.activity_id}}" bindtap='typeHandler'></image>
+  <view class='type-item' wx:for="{{activity}}" wx:key="{{index}}" data-videoid="{{item.id}}"  data-index="{{item.index}}" bindtap="gotoDetail">
+  <view wx:if="{{item.count == 1}}">
+    <image class='type-img' src='{{item.img}}' mode='aspectFill'></image>
     <view class='title'>
         <text>{{item.name}}</text>
     </view>
+  </view>
+  <view wx:elif="{{item.count > 1}}">
+    <view class="listimg">
+      <view wx:for="{{item.detail}}" wx:key="{{index}}" wx:for-item="detailitem">
+        <image src='{{detailitem.img}}' mode='aspectFill'></image>      
+      </view>
+    </view>
+
+  </view>
+
     <view class='title'>
         <text>订单时间：{{item.date}}</text>
     </view>

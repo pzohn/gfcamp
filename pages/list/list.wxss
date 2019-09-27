@@ -63,3 +63,17 @@
   text-align: center;
   color: white;
 }
+
+.listimg{
+  display: flex;
+  flex-direction: row;
+  overflow:auto;
+}
+.listimg image{
+    width: 150rpx;
+    height: 150rpx;
+    
+    margin-right: 20rpx;
+    flex-shrink: 0;
+    border-radius: 10rpx;
+}
