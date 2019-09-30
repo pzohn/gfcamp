@@ -121,12 +121,21 @@ page {
  
 }
 .submit_order {
-    width: 32%;
+    width: 30%;
     background: #ad0e12;
     color: white;
     font-size: 32rpx;
     text-align: center;
 }
+
+.close_order {
+    width: 30%;
+    background: #49bd13;
+    color: white;
+    font-size: 32rpx;
+    text-align: center;
+}
+
 .pay_money {
     font-size: 32rpx;
     margin-left: 30rpx;

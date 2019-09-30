@@ -45,7 +45,7 @@
 
 .btn{
   right: 10rpx;
-  width: 70px;
+  width: 100px;
   background-color:#FF5722;
   height: 28px;
   border-radius: 25rpx;
@@ -55,7 +55,7 @@
 }
 .btn1{
   right: 10rpx;
-  width: 90px;
+  width: 100px;
   background-color:rgb(34, 49, 255);
   height: 28px;
   border-radius: 25rpx;

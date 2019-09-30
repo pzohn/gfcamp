@@ -64,7 +64,8 @@ Page({
           object.color = res.data[index].color;
           object.trade_id = res.data[index].trade_id;
           object.address = res.data[index].address;
-          if (object.status == '未支付'){
+          object.total_charge = res.data[index].charge;
+          if (object.status == '待付款'){
             object.payhide = false;
             object.deletehide = false;
           }else{
@@ -107,21 +108,12 @@ Page({
 
   },
 
-  getStatus(id) {
-    if (id == 1){
-      return '待付款';
-    }
-    else if (id == 2) {
-      return '待发货';
-    }
-  },
-
   delete: function (e) {
     var id = e.currentTarget.dataset.id;
     var page = this
     wx.showModal({
-      title: '删除订单',
-      content: '确认删除订单吗?',
+      title: '关闭订单',
+      content: '确认关闭订单吗?',
       success: function (res) {
         if (res.confirm) {
           wx.request({
@@ -132,7 +124,7 @@ Page({
             method: 'POST',
             success: function (res) {
               wx.showToast({
-                title: '删除成功',
+                title: '关闭成功',
                 icon: 'success',
                 duration: 3000,
                 success: function () {

@@ -24,16 +24,19 @@ Page({
     hasAddr: false, //选项
     order_message: '', //订单留言
     cart_ids: [], // 购物车商品id
-    type: ''
+    type: '',
+    status: '',
+    page_id:0
   },
 
   //  提交订单
   bindSubmitOrder: function (e) {
-    if (this.data.type == 'trade') {
-      this.dealTrade()
-    } else if (this.data.type == 'cert') {
-      this.dealCert();
-    }
+    this.pay()
+  },
+
+  //  关闭订单
+  bindCloseOrder: function (e) {
+    this.delete()
   },
 
   typeHandler: function (e) {
@@ -45,44 +48,102 @@ Page({
     });
   },
 
-  dealTrade() {
-    var page = this;
-    wx.login({
-      success: res => {
-        var code = res.code;
-        if (code) {
+  pay: function () {
+    var page = this
+    wx.showModal({
+      title: '支付订单',
+      content: '确认支付订单吗?',
+      success: function (res) {
+        if (res.confirm) {
+          wx.login({
+            success: res => {
+              var code = res.code;
+              if (code) {
+                wx.request({
+                  url: 'https://www.gfcamps.cn/onRePay',
+                  data: {
+                    js_code: code,
+                    trade_id: app.globalData.listdetail.trade_id
+                  },
+                  method: 'POST',
+                  success: function (res) {
+                    wx.requestPayment(
+                      {
+                        'timeStamp': res.data.timeStamp,
+                        'nonceStr': res.data.nonceStr,
+                        'package': res.data.package,
+                        'signType': 'MD5',
+                        'paySign': res.data.paySign,
+                        'success': function (res) {
+                          wx.showToast({
+                            title: '支付成功',
+                            icon: 'success',
+                            duration: 3000,
+                            success: function () {
+                              setTimeout(function () {
+                                //要延时执行的代码
+                                wx.redirectTo({
+                                  url: '../list/list?type=3'
+                                })
+                              }, 2000)
+                            }
+                          });
+                        },
+                        'fail': function (res) {
+                        },
+                        'complete': function (res) {
+                        }
+                      })
+                  },
+                  fail: function (res) {
+                  }
+                })
+              }
+            }
+          })
+        }
+      }
+    })
+  },
+
+  delete: function () {
+    var page = this
+    wx.showModal({
+      title: '关闭订单',
+      content: '确认关闭订单吗?',
+      success: function (res) {
+        if (res.confirm) {
           wx.request({
-            url: 'https://www.gfcamps.cn/onPay',
+            url: 'https://www.gfcamps.cn/hideOrder',
             data: {
-              js_code: code,
-              detail_id: page.data.activity_id,
-              phone: app.globalData.phone,
-              num: page.data.goods_count,
-              address_id: page.data.address_id
+              id: app.globalData.listdetail.trade_id
             },
             method: 'POST',
             success: function (res) {
-              wx.requestPayment(
-                {
-                  'timeStamp': res.data.timeStamp,
-                  'nonceStr': res.data.nonceStr,
-                  'package': res.data.package,
-                  'signType': 'MD5',
-                  'paySign': res.data.paySign,
-                  'success': function (res) {
-                    wx.showToast({
-                      title: '支付成功',
-                      icon: 'success',
-                      duration: 5000
-                    });
-                  },
-                  'fail': function (res) {
-                  },
-                  'complete': function (res) {
-                  }
-                })
+              wx.showToast({
+                title: '关闭成功',
+                icon: 'success',
+                duration: 3000,
+                success: function () {
+                  setTimeout(function () {
+                    //要延时执行的代码
+                    wx.redirectTo({
+                      url: '../list/list?type=' + page.data.page_id
+                    })
+                  }, 2000)
+                }
+              });
             },
             fail: function (res) {
+              wx.showModal({
+                title: '错误提示',
+                content: '服务器无响应，请联系工作人员!',
+                success: function (res) {
+                  if (res.confirm) {
+                  } else if (res.cancel) {
+                  }
+                }
+              })
             }
           })
         }
@@ -100,6 +161,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var page_id = options.page_id;
+    this.setData({ page_id: page_id});
     console.log(app.globalData.listdetail);
     this.initAddr();
     this.initData();
@@ -142,7 +205,7 @@ Page({
         object.price = app.globalData.listdetail.detail[index].charge;
         object.image = app.globalData.listdetail.detail[index].img;
         object.count = app.globalData.listdetail.detail[index].num;
-        object.id = app.globalData.listdetail.detail[index].id;
+        object.id = app.globalData.listdetail.detail[index].wx_id;
         object.activity_id = app.globalData.listdetail.detail[index].activity_id;
         goods_info[index] = object;
         total_price += object.price * object.count;
@@ -150,7 +213,8 @@ Page({
     }
     this.setData({
       goods_info: goods_info,
-      total_price: total_price
+      total_price: total_price,
+      status: app.globalData.listdetail.status
     });
     
   },
