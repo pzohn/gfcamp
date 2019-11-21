@@ -10,7 +10,9 @@ Page({
     phone:'',
     detail:'',
     detail_id: 0,
-    activity_id: 0
+    activity_id: 0,
+    type: '',
+    count: 0
   },
 
   onLoad: function (options) {
@@ -22,9 +24,13 @@ Page({
     // }
     var detail_id = options.detail_id;
     var activity_id = options.activity_id;
+    var type = options.type;
+    var count = options.count
     this.setData({
       detail_id: detail_id,
-      activity_id: activity_id
+      activity_id: activity_id,
+      type: type,
+      count: count
     });
     this.initRegion();
   },
@@ -46,8 +52,8 @@ Page({
       },
       method: 'POST',
       success: function (res) {
-        wx.navigateTo({
-          url: '../certmake/certmake?id=' + page.data.detail_id + '&activity_id=' + page.data.activity_id
+        wx.redirectTo({
+          url: '../certmake/certmake?id=' + page.data.detail_id + '&activity_id=' + page.data.activity_id + '&type=' + page.data.type + '&num=' + page.data.count
         })
       },
       fail: function (res) {

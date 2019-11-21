@@ -29,12 +29,12 @@ Page({
   //选择地址
   bindaddress: function () {
     if (this.data.hasAddr == 1) {
-      wx.navigateTo({
-        url: '../editaddress/editaddress?id=' + this.data.address_id + '&activity_id=' + this.data.activity_id + '&detail_id=' + this.data.detail_id
+      wx.redirectTo({
+        url: '../editaddress/editaddress?id=' + this.data.address_id + '&activity_id=' + this.data.activity_id + '&detail_id=' + this.data.detail_id + '&type=' + this.data.type + '&count=' + this.data.goods_count
       })
     } else {
-      wx.navigateTo({
-        url: '../newaddress/newaddress?activity_id=' + this.data.activity_id + '&detail_id=' + this.data.detail_id
+      wx.redirectTo({
+        url: '../newaddress/newaddress?activity_id=' + this.data.activity_id + '&detail_id=' + this.data.detail_id + '&type=' + this.data.type + '&count=' + this.data.goods_count
       })
     }
 
